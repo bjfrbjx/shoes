@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.devMode" value="true" />
+<constant name="struts.i18n.encoding" value="UTF-8" />
+       <package name="shoes" namespace="/" extends="struts-default">
+        <action name="login" class="com.shoes.action.LoggerAction" method="login">
+            <result name="success">/main/main.jsp</result>
+            <result name="admin">/main/admin.jsp</result>
+            <result name="input">/login.jsp </result>
+            <result name="error">/index.jsp</result>
+        </action>
+        <action name="logout" class="com.shoes.action.LoggerAction" method="logout">
+            <result name="success">/index.jsp</result>
+        </action>
+        <action name="regist" class="com.shoes.action.LoggerAction" method="regist">
+            <result name="success">/main/main.jsp</result>
+            <result name="input">/regist.jsp </result>
+            <result name="error">/index.jsp</result>
+        </action>
+        <action name="pay" class="com.shoes.action.CheckAction" method="createpreorder">
+        <result name="success">/main/pay.jsp</result>
+        </action>
+        <action name="buy" class="com.shoes.action.CheckAction" method="createorder">
+        <result name="success">/main/paysuccess.jsp</result>
+        </action>
+        <action name="shopping" class="com.shoes.action.CheckAction" method="shopping">
+        <result name="success" type="redirect">/main/shopping.jsp</result>
+        </action>
+        <action name="rempreord" class="com.shoes.action.CheckAction" method="rempreord">
+        <result name="success">/main/shopping.jsp</result>
+        </action>
+        <action name="cleanpreord" class="com.shoes.action.CheckAction" method="cleanpreord">
+        <result name="success">/main/shopping.jsp</result>
+        </action>
+        <action name="addrep" class="com.shoes.action.AdminAction" method="addrep">
+        <result name="success">/main/admin.jsp</result>
+        </action>
+    	<action name="withdraw" class="com.shoes.action.AdminAction" method="withdraw">
+        <result name="success">/main/admin.jsp</result>	
+    	</action>
+
+    </package>
+</struts>
