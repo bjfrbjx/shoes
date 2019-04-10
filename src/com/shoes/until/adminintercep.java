@@ -16,9 +16,11 @@ public class adminintercep extends AbstractInterceptor {
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
+		System.out.println("≈–∂œπ‹¿Ì‘±");
 		HttpSession session=ServletActionContext.getRequest().getSession();
-		if((Boolean)session.getAttribute("admin")!=true )
-			return null;
+		Boolean isadmin =(Boolean)session.getAttribute("admin");
+		if( isadmin==null || isadmin!=true)
+			return "error";
 		else
 			return invocation.invoke();
 	}

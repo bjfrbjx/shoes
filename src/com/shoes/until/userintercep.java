@@ -15,9 +15,10 @@ public class userintercep extends AbstractInterceptor {
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
+		System.out.println("ÅÐ¶ÏµÇÂ½");
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		if(session.getAttribute("user")==null)
-			return null;
+			return "error";
 		else
 			return invocation.invoke();
 	}

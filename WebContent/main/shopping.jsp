@@ -15,7 +15,7 @@
 ;
 for(Preorder pd:pds) {%>
 <tr><td><%=pd.getOrderID() %></td><td><%=pd.getUsername() %></td><td><%=pd.getShoeID() %></td>
-<td><a href="pay?preord.shoeID=<%=pd.getShoeID() %>">购买</a>
+<td><a href="pay?preord.shoeID=<%=pd.getShoeID() %>&preord.orderID=<%=pd.getOrderID() %>">购买</a>
 <td><a href="rempreord?preord.orderID=<%=pd.getOrderID() %>">移除</a>
 </tr>
 <%} %>

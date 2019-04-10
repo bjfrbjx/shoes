@@ -5,21 +5,16 @@
 <struts>
 <constant name="struts.devMode" value="true" />
 <constant name="struts.i18n.encoding" value="UTF-8" />
-       <package name="shoes" namespace="/" extends="struts-default">
-        <action name="login" class="com.shoes.action.LoggerAction" method="login">
-            <result name="success">/main/main.jsp</result>
-            <result name="admin">/main/admin.jsp</result>
-            <result name="input">/login.jsp </result>
-            <result name="error">/index.jsp</result>
-        </action>
-        <action name="logout" class="com.shoes.action.LoggerAction" method="logout">
-            <result name="success">/index.jsp</result>
-        </action>
-        <action name="regist" class="com.shoes.action.LoggerAction" method="regist">
-            <result name="success">/main/main.jsp</result>
-            <result name="input">/regist.jsp </result>
-            <result name="error">/index.jsp</result>
-        </action>
+<constant name="struts.action.exetension" value="action,do,"/>
+    <package name="checkAction" extends="struts-default" namespace="/main">
+    <interceptors>
+         <interceptor name="userinterceptor" class="com.shoes.until.userintercep" />
+         <interceptor-stack name="userStack">
+                    <interceptor-ref name="userinterceptor"></interceptor-ref>
+                    <interceptor-ref name="defaultStack"></interceptor-ref>
+                </interceptor-stack>
+      </interceptors>
+      <default-interceptor-ref name="userStack"></default-interceptor-ref>
         <action name="pay" class="com.shoes.action.CheckAction" method="createpreorder">
         <result name="success">/main/pay.jsp</result>
         </action>
@@ -35,12 +30,44 @@
         <action name="cleanpreord" class="com.shoes.action.CheckAction" method="cleanpreord">
         <result name="success">/main/shopping.jsp</result>
         </action>
-        <action name="addrep" class="com.shoes.action.AdminAction" method="addrep">
-        <result name="success">/main/admin.jsp</result>
+</package>
+   
+    <package name="AdminAction" extends="struts-default" namespace="/admin"> 
+    <interceptors>
+         <interceptor name="admininterceptor" class="com.shoes.until.adminintercep" />
+         <interceptor-stack name="adminStack">
+                    <interceptor-ref name="admininterceptor"></interceptor-ref>
+                    <interceptor-ref name="defaultStack"></interceptor-ref>
+                </interceptor-stack>
+      </interceptors>
+      <default-interceptor-ref name="adminStack"></default-interceptor-ref>
+      <action name="addrep" class="com.shoes.action.AdminAction" method="addrep">
+        <result name="success">/admin/admin.jsp</result>
         </action>
     	<action name="withdraw" class="com.shoes.action.AdminAction" method="withdraw">
-        <result name="success">/main/admin.jsp</result>	
+        <result name="success">/admin/admin.jsp</result>	
     	</action>
+    </package>
+       <package name="user" namespace="/" extends="struts-default">
+
+        <action name="login" class="com.shoes.action.LoginAction" method="login">
+            <result name="success">/main/main.jsp</result>
+            <result name="admin">/admin/admin.jsp</result>
+            <result name="input">/login.jsp </result>
+            <result name="error">/index.jsp</result>
+        </action>
+        <action name="logout" class="com.shoes.action.LogoutAction" method="logout">
+            <result name="success">/index.jsp</result>
+        </action>
+        <action name="regist" class="com.shoes.action.RegistAction" method="regist">
+            <result name="success">/main/main.jsp</result>
+            <result name="input">/regist.jsp </result>
+            <result name="error">/index.jsp</result>
+        </action>
+        
+ 
 
     </package>
-</struts>
+    </struts>
+    
+      

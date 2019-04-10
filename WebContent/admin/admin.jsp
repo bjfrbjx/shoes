@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; utf-8" import="com.shoes.entity.*,com.shoes.until.DB,java.util.List"
     pageEncoding="utf-8"%>
+    <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,14 +22,14 @@ List<Shoes> sl=DB.getshoes();
 <td><%=sh.getKind() %></td>
 <td><%=sh.getPrice() %></td>
 <td><%=sh.getSex() %></td>
-<td><a href="withdraw?shoes.shoeID=<%=sh.getShoeID() %>&shoes.IMG=<%=sh.getIMG() %>">下架</a></td>
+<td><a href="<%=request.getContextPath() %>/admin/withdraw?shoes.shoeID=<%=sh.getShoeID() %>&shoes.IMG=<%=sh.getIMG() %>">下架</a></td>
 </tr>
 <%} %>
 </tbody>
 </table>
 <div ><img alt="tupian" src="/struts2/IMG/a.jpg" id="show"></div>
 <hr/>
-<form action="addrep" enctype="multipart/form-data" method="post" >
+<s:form action="addrep" enctype="multipart/form-data" method="post" namespace="/admin" >
 <ul>
 <li>鞋号<input type="text" name="shoes.shoeID" ></li>
 <li>性别<input type="text" name="shoes.sex" ></li>
@@ -40,7 +41,7 @@ List<Shoes> sl=DB.getshoes();
 </ul>
 <button type="submit">sub</button>
 <button type="reset">reset</button>
-</form>
+</s:form>
 
 <%@ include file="/complete/footline.jsp"  %>
 <script type="text/javascript">
@@ -50,5 +51,6 @@ function showImg(src){
 }
 
 </script>
+admin
 </body>
 </html>

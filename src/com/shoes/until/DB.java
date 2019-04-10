@@ -43,7 +43,7 @@ public class DB {
 	public static Boolean regist(String name,String sex,String password,String email) throws SQLException {
 		Boolean r=false;
 		ResultSet cours=sta.executeQuery("select * from users where name=\""+name+"\"");
-		if(cours.next()) {cours.close();return null;}
+		if(cours.next()) {cours.close();return false;}
 		String sql ="insert into users(name,email,sex,password) values (?,?,?,?)";
 		PreparedStatement pst=null;
 		try {

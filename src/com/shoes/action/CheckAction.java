@@ -37,12 +37,17 @@ public class CheckAction extends ActionSupport {
 	public CheckAction() {
 		// TODO 自动生成的构造函数存根
 	}
-	public String createpreorder() {
+	public String createpreorder() throws UnsupportedEncodingException {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String username= ((User)request.getSession().getAttribute("user")).getName();	
-		String orderID=username+"-"+Integer.toHexString((int) (Math.random()*1000))+"-"+this.preord.getShoeID();
 		this.preord.setUsername(username);
+		if(preord.getOrderID()==null) {
+		String orderID=username+"-"+Integer.toHexString((int) (Math.random()*1000))+"-"+this.preord.getShoeID();
 		this.preord.setOrderID(orderID);
+		}
+		else {
+			this.rempreord();
+		}
 		request.getSession().setAttribute("payorder",preord);
 		return SUCCESS;
 	}
@@ -53,7 +58,7 @@ public class CheckAction extends ActionSupport {
 			return SUCCESS;
 		
 	}
-	public String shopping() {
+	public String shopping() throws UnsupportedEncodingException {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		this.createpreorder();
 		DB.addpreorder(preord);

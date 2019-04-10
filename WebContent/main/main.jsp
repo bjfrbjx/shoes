@@ -20,8 +20,8 @@ List<Shoes> sl=DB.getshoes();
 <td><%=sh.getKind() %></td>
 <td><%=sh.getPrice() %></td>
 <td><%=sh.getSex() %></td>
-<td><a href="pay?preord.shoeID=<%=sh.getShoeID() %>">购买</a></td>
-<td><a href="shopping?preord.shoeID=<%=sh.getShoeID() %>">添加购物车</a></td>
+<td><a href="<%=request.getContextPath()%>/main/pay?preord.shoeID=<%=sh.getShoeID() %>">购买</a></td>
+<td><a href="<%=request.getContextPath()%>/main/shopping?preord.shoeID=<%=sh.getShoeID() %>">添加购物车</a></td>
 </tr>
 <%} %>
 </tbody>
