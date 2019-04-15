@@ -15,7 +15,7 @@ List<Shoes> sl=DB.getshoes();
 <thead><tr><th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>购买</th><th>购物车</th></tr></thead>
 <tbody>
 <%for(Shoes sh:sl) {%>
-<tr>
+<tr onclick=showComments("<%=sh.getShoeID() %>")>
 <td onclick=showImg("/struts2/<%=sh.getIMG() %>")><%=sh.getBrand() %></td>
 <td><%=sh.getKind() %></td>
 <td><%=sh.getPrice() %></td>
@@ -26,16 +26,37 @@ List<Shoes> sl=DB.getshoes();
 <%} %>
 </tbody>
 </table>
-<div ><img alt="tupian" src="/struts2/<%=sl.get(0).getIMG() %>" id="show"></div>
+<div ><img alt="tupian" src="/struts2/<%=sl.get(0).getIMG() %>" id="show">
+<ul id="comments"><li>买前看一看</li></ul>
+</div>
 
 <a href="/struts2/main/shopping.jsp">购物车</a>
 <%@ include file="/complete/footline.jsp"  %>
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" ></script>
 <script type="text/javascript">
 function showImg(src){
 	var showbox=document.getElementById("show");
 	showbox.setAttribute("src",src);
 }
 
+function showComments(shoeid){
+	$("#comments").empty();
+	$.ajax({
+		type:"post",
+		url:"main/getComments",
+		data:{shoeid:shoeid},
+		dataType:"json",
+		success:function(data){
+		var data2 = eval(data);
+		for(var i in data2){
+			$("#comments").append("<li>"+data2[i].username+":<p>"+data2[i].message+"</p></li>");
+				}
+			},
+		error:function(data){alert("fail");},
+		});
+		
+}
 </script>
+
 </body>
 </html>

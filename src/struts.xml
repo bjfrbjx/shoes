@@ -6,7 +6,7 @@
 <constant name="struts.devMode" value="true" />
 <constant name="struts.i18n.encoding" value="UTF-8" />
 <constant name="struts.action.exetension" value="action,do,"/>
-    <package name="checkAction" extends="struts-default" namespace="/main">
+    <package name="checkAction" extends="struts-default,json-default" namespace="/main">
     <interceptors>
          <interceptor name="userinterceptor" class="com.shoes.until.userintercep" />
          <interceptor-stack name="userStack">
@@ -30,6 +30,10 @@
         <action name="cleanpreord" class="com.shoes.action.CheckAction" method="cleanpreord">
         <result name="success">/main/shopping.jsp</result>
         </action>
+        <action name="getComments" class="com.shoes.action.CommentAction" method="getComments">
+            <result type="json" name="success"> <param name="root">result</param> </result>
+            <result name="error">/error/resubError.jsp</result>
+        </action>
 </package>
    
     <package name="AdminAction" extends="struts-default" namespace="/admin"> 
@@ -48,8 +52,16 @@
         <result name="success">/admin/admin.jsp</result>	
     	</action>
     </package>
-       <package name="user" namespace="/" extends="struts-default">
-
+    
+    <package name="user" namespace="/" extends="struts-default">
+	   <action name="addcomment" class="com.shoes.action.CommentAction" method="subComment">
+	   <result name="success" >/main/comment.jsp</result>
+	   <result name="error">/error/commentsError.jsp</result>
+       <result name="invalid.token">/error/resubError.jsp</result>
+	   <interceptor-ref name="token"/>
+	   <interceptor-ref name="defaultStack"/>
+		    
+        </action>
         <action name="login" class="com.shoes.action.LoginAction" method="login">
             <result name="success">/main/main.jsp</result>
             <result name="admin">/admin/admin.jsp</result>
@@ -60,12 +72,13 @@
             <result name="success">/index.jsp</result>
         </action>
         <action name="regist" class="com.shoes.action.RegistAction" method="regist">
+        <interceptor-ref name="token"/>
+	   <interceptor-ref name="defaultStack"/>
             <result name="success">/main/main.jsp</result>
             <result name="input">/regist.jsp </result>
             <result name="error">/index.jsp</result>
+            <result name="invalid.token">/error/resubError.jsp</result>
         </action>
-        
- 
 
     </package>
     </struts>

@@ -14,6 +14,7 @@
 <br/>邮箱<s:textfield lable="user.email" name="user.email" ></s:textfield>
 <s:radio list="#{'男':'先生','女':'女士'}" name="user.sex" value="男"/>
 <br/><s:submit lable="Say Hello" value="提交"/>
+<s:token></s:token>
 </s:form>
 <hr/>
 </body>

@@ -6,10 +6,10 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Hello World</title>
+<title>shoes store</title>
 </head>
 <body>
-   <h1>Hello World From Struts2</h1>
+   <h1>shoes store</h1>
  <s:form action="login" method="post" namespace="/">
 <br><s:textfield lable="name" name="user.name" >姓名</s:textfield>
 <br><s:textfield lable="password" name="user.password" >密码</s:textfield>

@@ -64,7 +64,6 @@ public void setImgfileFileName(String imgfileFileName) {
 		if(this.shoes.getShoeID()!=null&&!this.shoes.getShoeID().equals("")) {
 		try {
 			String imgsrc= ServletActionContext.getServletContext().getRealPath(this.shoes.getIMG().replace("..", ""));
-			;
 			DB.removeshoes(this.shoes.getShoeID());
 			DB.remimg(imgsrc);
 			sl.remove(this.shoes);

@@ -24,7 +24,6 @@ public class RegistAction extends ActionSupport {
 	public String regist() throws SQLException {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		request.getSession().setAttribute("admin",new Boolean(false));
-		;
 		Boolean r=DB.regist(this.user.getName(), this.user.getSex(), this.user.getPassword(),this.user.getEmail());
 		if(!r){
 			 request.setAttribute("error", "×¢²áÊ§°Ü");

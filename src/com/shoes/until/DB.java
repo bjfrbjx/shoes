@@ -17,6 +17,7 @@ import java.util.Set;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
+import com.shoes.entity.Comment;
 import com.shoes.entity.Order;
 import com.shoes.entity.Preorder;
 import com.shoes.entity.Shoes;
@@ -215,4 +216,51 @@ public class DB {
     	}
     	else {;}
     }
+    public static void addcomment(Comment c) {
+    	String sql ="insert into comments(shoeid,username,message,date) values (?,?,?,?)";
+		PreparedStatement pst=null;
+    	
+    	try {
+    		pst=con.prepareStatement(sql);
+        	pst.setString(1, c.getShoeid());
+        	pst.setString(2, c.getUsername());
+        	pst.setString(3, c.getMessage());
+        	pst.setString(4, c.getDate());
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+    	
+    	
+    }
+    public static List<Comment> getCommentsByShoeid(String shoeid) throws SQLException{
+    	List<Comment> comments=new ArrayList<Comment>();
+    	ResultSet cours=sta.executeQuery("select username,date,message from Comments where shoeid=\""+shoeid+"\"");
+    	while(cours.next()) {
+    		Comment c =new Comment();
+    		c.setDate(cours.getString("date"));
+    		c.setUsername(cours.getString("username"));
+    		c.setMessage(cours.getString("message"));
+    		c.setShoeid(shoeid);
+    		comments.add(c);
+    	}
+    	cours.close();
+		return comments;
+    }
+    public static List<Comment> getCommentsByUsername(String username) throws SQLException{
+    	List<Comment> comments=new ArrayList<Comment>();
+    	ResultSet cours=sta.executeQuery("select shoeid,date,message from Comments where username=\""+username+"\"");
+    	while(cours.next()) {
+    		Comment c =new Comment();
+    		c.setDate(cours.getString("date"));
+    		c.setShoeid(cours.getString("shoeid"));
+    		c.setMessage(cours.getString("message"));
+    		c.setUsername(username);
+    		comments.add(c);
+    	}
+    	cours.close();
+		return comments;
+    }
+
 }
