@@ -32,12 +32,17 @@ public class Shoes {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-	public float getSize() {
+	public Float getSize() {
 		return size;
 	}
 	public void setSize(float size) {
 		this.size = size;
 	}
+	@Override
+	public String toString() {
+		return "Shoes [size=" + size + ", kind=" + kind + ", shoeID=" + shoeID + ", price=" + price + "]";
+	}
+
 	public String getKind() {
 		return kind;
 	}

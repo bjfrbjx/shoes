@@ -13,7 +13,7 @@
 List<Shoes> sl=DB.getshoes();
 %>
 <table>
-<thead><tr><th>鞋号<th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>下架</th></tr></thead>
+<thead><tr><th>鞋号<th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>库存</th><th>下架</th><th>增库</th></tr></thead>
 <tbody>
 <%for(Shoes sh:sl) {%>
 <tr onclick=showImg("/struts2/<%=sh.getIMG() %>")>
@@ -22,7 +22,9 @@ List<Shoes> sl=DB.getshoes();
 <td><%=sh.getKind() %></td>
 <td><%=sh.getPrice() %></td>
 <td><%=sh.getSex() %></td>
+<td><%=sh.getSize() %></td>
 <td><a href="<%=request.getContextPath() %>/admin/withdraw?shoes.shoeID=<%=sh.getShoeID() %>&shoes.IMG=<%=sh.getIMG() %>">下架</a></td>
+<td><a href="<%=request.getContextPath() %>/admin/addstock?shoes.shoeID=<%=sh.getShoeID() %>">添库存</a></td>
 </tr>
 <%} %>
 </tbody>

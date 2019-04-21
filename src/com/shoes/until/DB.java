@@ -165,6 +165,7 @@ public class DB {
 			pst.setString(5, ord.getDate());
 			pst.setFloat(6, ord.getSumpric());
 			pst.executeUpdate();
+			DB.delrep(ord);
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -197,6 +198,18 @@ public class DB {
     	int l=sta.executeUpdate(sql);
     }
     public static void addrep(Shoes shoe) throws SQLException{
+    	ResultSet cours=sta.executeQuery("select size from shoes where shoeid=\""+shoe.getShoeID()+"\"");
+		if(cours.next()) {
+			float rep=cours.getFloat("size");
+			rep+=shoe.getSize();
+			String sql="update shoes set size=? where shoeid=?";
+			PreparedStatement pst=null;
+	    	pst=con.prepareStatement(sql);
+	    	pst.setFloat(1, rep);
+	    	pst.setString(2, shoe.getShoeID());
+	    	pst.executeUpdate();
+		}
+		else {
     	String sql ="insert into shoes(brand,size,kind,sex,price,shoeID,src) values (?,?,?,?,?,?,?)";
 		PreparedStatement pst=null;
     	pst=con.prepareStatement(sql);
@@ -208,6 +221,7 @@ public class DB {
     	pst.setString(6, shoe.getShoeID());
     	pst.setString(7, shoe.getIMG());
     	pst.executeUpdate();
+    	}
     }
     public static void remimg(String realpath) {
     	File f=new File(realpath);
@@ -233,6 +247,19 @@ public class DB {
 		}
     	
     	
+    }
+    public static void delrep(Order ord) throws SQLException {
+    	ResultSet cours=sta.executeQuery("select size from shoes where shoeid=\""+ord.getShoeID()+"\"");
+		if(cours.next()) {
+			float rep=cours.getFloat("size");
+			rep-=ord.getNum();
+			String sql="update shoes set size=? where shoeid=?";
+			PreparedStatement pst=null;
+	    	pst=con.prepareStatement(sql);
+	    	pst.setFloat(1, rep);
+	    	pst.setString(2, ord.getShoeID());
+	    	pst.executeUpdate();
+		}
     }
     public static List<Comment> getCommentsByShoeid(String shoeid) throws SQLException{
     	List<Comment> comments=new ArrayList<Comment>();

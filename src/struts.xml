@@ -15,6 +15,9 @@
                 </interceptor-stack>
       </interceptors>
       <default-interceptor-ref name="userStack"></default-interceptor-ref>
+      <global-results>
+      <result name="error">/index.jsp</result>
+      </global-results>
         <action name="pay" class="com.shoes.action.CheckAction" method="createpreorder">
         <result name="success">/main/pay.jsp</result>
         </action>
@@ -37,19 +40,26 @@
 </package>
    
     <package name="AdminAction" extends="struts-default" namespace="/admin"> 
+    
     <interceptors>
          <interceptor name="admininterceptor" class="com.shoes.until.adminintercep" />
          <interceptor-stack name="adminStack">
                     <interceptor-ref name="admininterceptor"></interceptor-ref>
                     <interceptor-ref name="defaultStack"></interceptor-ref>
                 </interceptor-stack>
+                
       </interceptors>
       <default-interceptor-ref name="adminStack"></default-interceptor-ref>
+      <global-results><result name="error" type="redirect">/index.jsp</result></global-results>
       <action name="addrep" class="com.shoes.action.AdminAction" method="addrep">
         <result name="success">/admin/admin.jsp</result>
         </action>
     	<action name="withdraw" class="com.shoes.action.AdminAction" method="withdraw">
         <result name="success">/admin/admin.jsp</result>	
+    	</action>
+    	<action name="addstock" class="com.shoes.action.AdminAction" method="addstock">
+    	<result name="success">/admin/admin.jsp</result>
+    	<result name="continue">/admin/addstock.jsp</result>
     	</action>
     </package>
     

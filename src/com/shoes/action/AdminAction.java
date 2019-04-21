@@ -73,4 +73,19 @@ public void setImgfileFileName(String imgfileFileName) {
 	}
 		return SUCCESS;
 	}
+	public String addstock() throws SQLException {
+		System.out.println(this.shoes);
+		HttpServletRequest request =ServletActionContext.getRequest();
+		if(this.shoes.getShoeID()==null)
+			return "error";
+		if(this.shoes.getSize()==0.0) {
+		request.setAttribute("shoeid", this.shoes.getShoeID());
+			return "continue";
+		}
+		else {
+			
+			DB.addrep(this.shoes);
+			return SUCCESS;
+		}
+	}
 }

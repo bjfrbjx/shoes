@@ -12,18 +12,23 @@
 List<Shoes> sl=DB.getshoes();
 %>
 <table>
-<thead><tr><th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>购买</th><th>购物车</th></tr></thead>
+<thead><tr><th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>库存</th><th>购买</th><th>购物车</th></tr></thead>
 <tbody>
-<%for(Shoes sh:sl) {%>
+<%for(Shoes sh:sl) {
+if(sh.getSize()>0){
+%>
 <tr onclick=showComments("<%=sh.getShoeID() %>")>
 <td onclick=showImg("/struts2/<%=sh.getIMG() %>")><%=sh.getBrand() %></td>
 <td><%=sh.getKind() %></td>
 <td><%=sh.getPrice() %></td>
 <td><%=sh.getSex() %></td>
+<td><%=sh.getSize() %></td>
 <td><a href="<%=request.getContextPath()%>/main/pay?preord.shoeID=<%=sh.getShoeID() %>">购买</a></td>
 <td><a href="<%=request.getContextPath()%>/main/shopping?preord.shoeID=<%=sh.getShoeID() %>">添加购物车</a></td>
+
 </tr>
-<%} %>
+<%}
+} %>
 </tbody>
 </table>
 <div ><img alt="tupian" src="/struts2/<%=sl.get(0).getIMG() %>" id="show">
