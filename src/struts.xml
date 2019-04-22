@@ -37,6 +37,9 @@
             <result type="json" name="success"> <param name="root">result</param> </result>
             <result name="error">/error/resubError.jsp</result>
         </action>
+        <action name="getorders" class="com.shoes.action.CheckAction" method="getorders">
+        <result name="success">/main/orders.jsp</result>
+        </action>
 </package>
    
     <package name="AdminAction" extends="struts-default" namespace="/admin"> 
@@ -65,14 +68,15 @@
     
     <package name="user" namespace="/" extends="struts-default">
 	   <action name="addcomment" class="com.shoes.action.CommentAction" method="subComment">
-	   <result name="success" >/main/comment.jsp</result>
-	   <result name="error">/error/commentsError.jsp</result>
-       <result name="invalid.token">/error/resubError.jsp</result>
-	   <interceptor-ref name="token"/>
-	   <interceptor-ref name="defaultStack"/>
+	   		<result name="success" >/main/comment.jsp</result>
+	   		<result name="index" >/main/main.jsp</result>
+	   		<result name="error">/error/commentsError.jsp</result>
+       		<result name="invalid.token">/error/resubError.jsp</result>
+	   		<interceptor-ref name="token"/>
+	   		<interceptor-ref name="defaultStack"/>
 		    
         </action>
-        <action name="login" class="com.shoes.action.LoginAction" method="login">
+        <action name="login" class="loginaction" method="login">
             <result name="success">/main/main.jsp</result>
             <result name="admin">/admin/admin.jsp</result>
             <result name="input">/login.jsp </result>

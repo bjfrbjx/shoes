@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.shoes.entity.Order;
 import com.shoes.entity.Preorder;
@@ -66,7 +68,14 @@ public class CheckAction extends ActionSupport {
 		pds.add(preord);
 		return SUCCESS;
 	}
-	
+	public String getorders() throws SQLException {
+		System.out.println("----------");
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		List<Order> orders=DB.getorder((User)session.getAttribute("user"));
+		System.out.println(orders.size());
+		ActionContext.getContext().put("orders", orders);
+		return SUCCESS;
+	}
 	public String cleanpreord() {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String username=((User)request.getSession().getAttribute("user")).getName();

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-4-22 19:53:13 by Hibernate Tools 5.4.2.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="test" dynamic-insert="false" dynamic-update="false" mutable="true" name="cn.Shoes" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="shoes">
+        <id name="shoeId" type="string">
+            <column length="40" name="shoeID"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="brand" optimistic-lock="true" type="string" unique="false">
+            <column length="40" name="brand" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="size" optimistic-lock="true" type="float" unique="false">
+            <column name="size" not-null="true" precision="12" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="kind" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="kind" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="sex" optimistic-lock="true" type="string" unique="false">
+            <column length="5" name="sex" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="src" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="src" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="price" optimistic-lock="true" type="float" unique="false">
+            <column name="price" not-null="true" precision="12" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

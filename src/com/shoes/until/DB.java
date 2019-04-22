@@ -90,9 +90,7 @@ public class DB {
 		return sl;
     }
     public static List<Order> getorder(User u) throws SQLException{
-    	if(ol==null) {
         	ol=new ArrayList<Order>();
-    	}
         	ResultSet cours=sta.executeQuery("select * from orders where userid=\""+u.getName()+"\"");
         	while(cours.next()) {
         		ol.add(new Order(cours.getString("orderid"),cours.getString("userid"),cours.getString("shoeid"),cours.getInt("num"),cours.getString("date"),cours.getFloat("sumpric")));

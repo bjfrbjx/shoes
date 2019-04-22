@@ -36,6 +36,7 @@ if(sh.getSize()>0){
 </div>
 
 <a href="/struts2/main/shopping.jsp">购物车</a>
+<a href="/struts2/main/getorders">账单</a>
 <%@ include file="/complete/footline.jsp"  %>
 <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" ></script>
 <script type="text/javascript">

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-4-22 19:53:13 by Hibernate Tools 5.4.2.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="test" dynamic-insert="false" dynamic-update="false" mutable="true" name="cn.Comments" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="comments">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="shoeid" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="shoeid" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="username" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="username" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="message" optimistic-lock="true" type="string" unique="false">
+            <column length="415" name="message" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="date" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="date" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

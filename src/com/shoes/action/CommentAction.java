@@ -40,6 +40,8 @@ public class CommentAction extends ActionSupport {
 		HttpServletRequest request =ServletActionContext.getRequest();
 		String username= ((User)request.getSession().getAttribute("user")).getName();	
 		if (this.comment!=null) {
+			if (this.comment.getMessage().equals("")) 
+				return "index";
 			this.comment.setUsername(username);
 			this.comment.setDate((new Date()).toLocaleString());
 			DB.addcomment(this.comment);
