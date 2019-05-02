@@ -1,18 +1,21 @@
 package com.shoes.action;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionSupport;
 import cn.Users;
- 
 import com.shoes.until.Service;
 
 public class LoginAction extends ActionSupport {
+	private Service service=null; 
 	private Users user=new Users();
+	public Service getService() {
+		return service;
+	}
+	public void setService(Service service) {
+		this.service = service;
+	}
+
 	public Users getUser() {
 		return user;
 	}
@@ -31,7 +34,8 @@ public class LoginAction extends ActionSupport {
 			request.getSession().setAttribute("admin",new Boolean(true));
 			return "admin";
 		}
-		Boolean dl=Service.login(this.user);
+System.out.println("serv is null? "+service);
+		Boolean dl=service.login(this.user);
 		if(!dl) {
 			request.getSession().removeAttribute("user");
 			request.setAttribute("error","µÇÂ½Ê§°Ü");

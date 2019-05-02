@@ -12,6 +12,31 @@ public class Shoes  implements java.io.Serializable {
 				+ ", src=" + src + ", price=" + price + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((shoeId == null) ? 0 : shoeId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Shoes other = (Shoes) obj;
+		if (shoeId == null) {
+			if (other.shoeId != null)
+				return false;
+		} else if (!shoeId.equals(other.shoeId))
+			return false;
+		return true;
+	}
+
 	private String shoeId;
 	private String brand;
 	private Float size;

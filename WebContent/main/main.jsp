@@ -9,7 +9,7 @@
 <body >
 <%@ include file="/complete/headline.jsp" %>
 <% Users u=(Users)session.getAttribute("user");
-List<Shoes> sl=Service.getshoes();
+List<Shoes> sl=(List<Shoes>)session.getAttribute("Shoeslist");
 %>
 <table>
 <thead><tr><th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>库存</th><th>购买</th><th>购物车</th></tr></thead>
@@ -59,7 +59,9 @@ function showComments(shoeid){
 			$("#comments").append("<li><pre>"+data[i].date+"  "+data[i].username+"  "+data[i].message+"</pre></li>");
 				}
 			},
-		error:function(data){alert("fail");},
+		error:function(data){
+			alert("fail");
+			},
 		});
 		
 }

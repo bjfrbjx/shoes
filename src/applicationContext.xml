@@ -19,16 +19,10 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">
         
 		<context:property-override location="classpath:db.properties"/>
-        <bean id="loginaction" class="com.shoes.action.LoginAction" scope="prototype"></bean>
-        <bean id="registaction" class="com.shoes.action.RegistAction" scope="prototype"></bean>
-        
-          <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-   		 <property name="driverClass" value="com.mysql.jdbc.Driver" />
-	 	<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test" />
-	 	<property name="user" value="root" />
-	 	<property name="password" value="root" /></bean>
+
+          <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"></bean>
 		<!-- sessionfactory -->
-    	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" lazy-init="false">
+    	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"> <!-- lazy-init="false"-->
         	<property name="dataSource" ref="dataSource" />
         	<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
         	<property name="mappingLocations" value="classpath:cn/*.hbm.xml"></property>
@@ -49,5 +43,11 @@
         	<aop:pointcut expression="execution(* cn.DAOimpl.*(..))" id="txPointcut"/>
         	<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     	</aop:config>
+    	
+    	<bean id="loginaction" class="com.shoes.action.LoginAction" scope="prototype" p:user-ref="user" p:service-ref="service"></bean>
+        <bean id="registaction" class="com.shoes.action.RegistAction" scope="prototype" p:user-ref="user" p:service-ref="service"></bean>
+        <bean id="DAOimpl" class="cn.DAOimpl" scope="singleton" p:sessionFactory-ref="sessionFactory"></bean>
+        <bean id="service" class="com.shoes.until.Service" p:dao-ref="DAOimpl" scope="prototype"></bean>
+        <bean id="user" class="cn.Users" scope="prototype"></bean>
         </beans>
 

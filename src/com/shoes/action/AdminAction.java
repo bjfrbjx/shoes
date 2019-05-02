@@ -67,7 +67,8 @@ public void setImgfileFileName(String imgfileFileName) {
 		HttpServletRequest request =ServletActionContext.getRequest();
 		List<Shoes> sl=(List<Shoes>)request.getSession().getAttribute("Shoeslist");
 		if(this.shoes.getShoeId()!=null&&!this.shoes.getShoeId().equals("")) {
-		String imgsrc= ServletActionContext.getServletContext().getRealPath(this.shoes.getSrc().replace("..", ""));
+		String imgsrc= ServletActionContext.getServletContext().getRealPath(this.shoes.getSrc());
+		System.out.println("shoes "+this.shoes);
 		service.removeshoes(this.shoes);
 		service.remimg(imgsrc);
 		sl.remove(this.shoes);

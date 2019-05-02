@@ -7,9 +7,17 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.shoes.until.Service;
 
+import cn.User;
 import cn.Users;
 
 public class RegistAction extends ActionSupport {
+	private Service service=null; 
+	public Service getService() {
+		return service;
+	}
+	public void setService(Service service) {
+		this.service = service;
+	}
 	private Users user=new Users();
 	String token=null;
 	public void setToken(String token) { this.token = token; }
@@ -26,7 +34,7 @@ public class RegistAction extends ActionSupport {
 	public String regist() throws SQLException {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		request.getSession().setAttribute("admin",new Boolean(false));
-		Boolean r=Service.regist(this.user);
+		Boolean r=service.regist(this.user);
 		if(!r){
 			 request.setAttribute("error", "×¢²áÊ§°Ü");
 		 return ERROR;

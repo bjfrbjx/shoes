@@ -20,6 +20,13 @@ public class CheckAction extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = -493214965117151809L;
+	Service service=null; 
+	public Service getService() {
+		return service;
+	}
+	public void setService(Service service) {
+		this.service = service;
+	}
 	private Preorder preord=new Preorder();
 	private Orders order=new Orders();
 	public Orders getOrder() {
@@ -49,11 +56,12 @@ public class CheckAction extends ActionSupport {
 			this.rempreord();
 		}
 		request.getSession().setAttribute("payorder",preord);
+		ActionContext.getContext().getValueStack().set("singleprice", service.getprice(preord.getShoeid()));;
 		return SUCCESS;
 	}
 	public String createorder() {
 		HttpServletRequest request=ServletActionContext.getRequest();
-			Service.addOder(this.order);
+			service.addOder(this.order);
 			request.setAttribute("order", this.order);
 			return SUCCESS;
 		
@@ -61,14 +69,14 @@ public class CheckAction extends ActionSupport {
 	public String shopping() throws UnsupportedEncodingException, SQLException {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		this.createpreorder();
-		Service.addpreorder(preord);
+		service.addpreorder(preord);
 		List<Preorder> pds=(List<Preorder>)request.getSession().getAttribute("preorder");
 		pds.add(preord);
 		return SUCCESS;
 	}
 	public String getorders() throws SQLException {
 		HttpSession session=ServletActionContext.getRequest().getSession();
-		List<Orders> orders=Service.getorder((Users)session.getAttribute("user"));
+		List<Orders> orders=service.getorder((Users)session.getAttribute("user"));
 		ActionContext.getContext().put("orders", orders);
 		return SUCCESS;
 	}
@@ -76,7 +84,7 @@ public class CheckAction extends ActionSupport {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		Users u=(Users)request.getSession().getAttribute("user");
 		if(u!=null&&!u.getName().equals("")) {
-			Service.cleanpreord(u);
+			service.cleanpreord(u);
 			((List<Preorder>)request.getSession().getAttribute("preorder")).clear();
 			}
 		return SUCCESS;
@@ -87,10 +95,8 @@ public class CheckAction extends ActionSupport {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		if(this.preord.getPreorderid()!=null) {
 			List<Preorder> pl=(List<Preorder>)request.getSession().getAttribute("preorder");
-			System.out.println(pl.size());
 			pl.remove(this.preord);
-			System.out.println(pl.size());
-			Service.removepreord(this.preord);
+			service.removepreord(this.preord);
 			return SUCCESS;
 		}
 		return ERROR;

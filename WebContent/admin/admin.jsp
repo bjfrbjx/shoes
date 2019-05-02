@@ -10,7 +10,7 @@
 <body>
 <%@ include file="/complete/headline.jsp" %>
 <% Users u=(Users)session.getAttribute("user");
-List<Shoes> sl=Service.getshoes();
+List<Shoes> sl=(List<Shoes>)session.getAttribute("Shoeslist");
 %>
 <table>
 <thead><tr><th>鞋号<th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>库存</th><th>下架</th><th>增库</th></tr></thead>
