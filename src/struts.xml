@@ -6,6 +6,8 @@
 <constant name="struts.devMode" value="true" />
 <constant name="struts.i18n.encoding" value="UTF-8" />
 <constant name="struts.action.exetension" value="action,do,"/>
+<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+<constant name="struts.ui.theme" value="simple" />
     <package name="checkAction" extends="struts-default,json-default" namespace="/main">
     <interceptors>
          <interceptor name="userinterceptor" class="com.shoes.until.userintercep" />
@@ -28,7 +30,7 @@
         <result name="success" type="redirect">/main/shopping.jsp</result>
         </action>
         <action name="rempreord" class="com.shoes.action.CheckAction" method="rempreord">
-        <result name="success">/main/shopping.jsp</result>
+        <result name="success" type="redirect">/main/shopping.jsp</result>
         </action>
         <action name="cleanpreord" class="com.shoes.action.CheckAction" method="cleanpreord">
         <result name="success">/main/shopping.jsp</result>
@@ -61,19 +63,23 @@
         <result name="success">/admin/admin.jsp</result>	
     	</action>
     	<action name="addstock" class="com.shoes.action.AdminAction" method="addstock">
-    	<result name="success">/admin/admin.jsp</result>
+    	<result name="success" type="redirect" >/admin/admin.jsp</result>
     	<result name="continue">/admin/addstock.jsp</result>
     	</action>
     </package>
     
     <package name="user" namespace="/" extends="struts-default">
 	   <action name="addcomment" class="com.shoes.action.CommentAction" method="subComment">
+	   		<interceptor-ref name="tokenSession"/>
+	   		<interceptor-ref name="params">
+  				<param name="excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
+			</interceptor-ref>
+	   		<interceptor-ref name="defaultStack"/>
 	   		<result name="success" >/main/comment.jsp</result>
 	   		<result name="index" >/main/main.jsp</result>
 	   		<result name="error">/error/commentsError.jsp</result>
        		<result name="invalid.token">/error/resubError.jsp</result>
-	   		<interceptor-ref name="token"/>
-	   		<interceptor-ref name="defaultStack"/>
+	   		
 		    
         </action>
         <action name="login" class="loginaction" method="login">
@@ -86,8 +92,8 @@
             <result name="success">/index.jsp</result>
         </action>
         <action name="regist" class="com.shoes.action.RegistAction" method="regist">
-        <interceptor-ref name="token"/>
-	   <interceptor-ref name="defaultStack"/>
+        <interceptor-ref name="tokenSession"/>
+	   	<interceptor-ref name="defaultStack"/>
             <result name="success">/main/main.jsp</result>
             <result name="input">/regist.jsp </result>
             <result name="error">/index.jsp</result>
@@ -97,4 +103,4 @@
     </package>
     </struts>
     
-      
+    

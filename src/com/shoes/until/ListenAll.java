@@ -42,9 +42,8 @@ public class ListenAll implements HttpSessionListener,ServletContextListener {
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
-    public void contextDestroyed(ServletContextEvent arg0)  { 
-    	;
-    	DB.setAccumVistors((Integer)arg0.getServletContext().getAttribute("AccumVistors"));
+    public void contextDestroyed(ServletContextEvent arg0)  {
+    	Service.setAccumVistors((Integer)arg0.getServletContext().getAttribute("AccumVistors"));
     }
 
 
@@ -55,7 +54,8 @@ public class ListenAll implements HttpSessionListener,ServletContextListener {
     	arg0.getServletContext().setAttribute("CurrentOnline", new Integer(0));
     	arg0.getServletContext().setAttribute("LoginNum", new Integer(0));
     	try {
-			Integer AV=DB.getAccumVistors();
+    		Integer AV=Service.getAccumVistors();
+			//Integer AV=DB.getAccumVistors();
 			arg0.getServletContext().setAttribute("AccumVistors", AV);
 		} catch (SQLException e) {
 			e.printStackTrace();

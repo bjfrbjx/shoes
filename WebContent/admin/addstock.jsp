@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; utf-8" import="com.shoes.entity.*,com.shoes.until.DB,java.util.List"
+<%@ page language="java" contentType="text/html; utf-8" 
     pageEncoding="utf-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -10,11 +10,12 @@
 <body>
 <%@ include file="/complete/headline.jsp" %>
 <form action="admin/addstock" method="post">
-<input name="shoes.shoeID" type="text" hidden="hidden" value="<%=(String)request.getAttribute("shoeid") %>" />
+<input name="shoes.shoeId" type="text" hidden="hidden" value="<%=(String)request.getAttribute("shoeid") %>" />
 <input name="shoes.size" type="number" value="0"/>
 <input type="submit" value="提交">
 </form>
 
 <%@ include file="/complete/footline.jsp" %>
+<script type="text/javascript" src="JS/IEURIencode.js" ></script>
 </body>
 </html>

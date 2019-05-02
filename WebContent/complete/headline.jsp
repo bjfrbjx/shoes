@@ -1,6 +1,6 @@
-<%@ page language="java" pageEncoding="utf-8" import="com.shoes.entity.User"%>
+<%@ page language="java" pageEncoding="utf-8" import="cn.Users"%>
 <% String txt=(String)request.getAttribute("error"); 
-User user=(User)session.getAttribute("user"); 
+Users user=(Users)session.getAttribute("user"); 
 Boolean isadmin=(Boolean)session.getAttribute("admin");
 if(txt!=null){%>
 <p><%=txt %></p>

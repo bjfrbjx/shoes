@@ -6,14 +6,26 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.shoes.entity.Comment;
-import com.shoes.entity.User;
-import com.shoes.until.DB;
+import cn.Comments;
+import cn.Users;
+ 
+import com.shoes.until.Service;
+
 import net.sf.json.JSONArray;
 
 public class CommentAction extends ActionSupport {
+	Service service=null; 
 	private String shoeid ="";
 	private String result;
+	String strutstoken;
+	public void setStrutstoken(String token) { this.strutstoken = token; }
+	public Service getService() {
+		return service;
+	}
+	public void setService(Service service) {
+		this.service = service;
+	}
+	public String getStrutstoken() { return strutstoken; }
 	public String getResult() {
 		return result;
 	}
@@ -26,11 +38,11 @@ public class CommentAction extends ActionSupport {
 	public void setShoeid(String shoeid) {
 		this.shoeid = shoeid;
 	}
-	private Comment comment=new Comment();
-	public Comment getComment() {
+	private Comments comment=new Comments();
+	public Comments getComment() {
 		return comment;
 	}
-	public void setComment(Comment comment) {
+	public void setComment(Comments comment) {
 	
 	}
 	public CommentAction() {
@@ -38,13 +50,13 @@ public class CommentAction extends ActionSupport {
 	}
 	public String subComment() {
 		HttpServletRequest request =ServletActionContext.getRequest();
-		String username= ((User)request.getSession().getAttribute("user")).getName();	
+		String username= ((Users)request.getSession().getAttribute("user")).getName();	
 		if (this.comment!=null) {
 			if (this.comment.getMessage().equals("")) 
 				return "index";
 			this.comment.setUsername(username);
 			this.comment.setDate((new Date()).toLocaleString());
-			DB.addcomment(this.comment);
+			service.addcomment(this.comment);
 			request.getSession().setAttribute("message", this.comment.getMessage());
 			return SUCCESS;
 		}
@@ -53,12 +65,11 @@ public class CommentAction extends ActionSupport {
 		
 	}
 	public String getComments() throws SQLException {
-		System.out.println(this.shoeid);
 		if(!this.shoeid.equals("")) {
-			List<Comment> cl=DB.getCommentsByShoeid(this.shoeid);
-			System.out.println(cl.size());
+			List<Comments> cl=service.getCommentsByShoeid(this.shoeid);
 			JSONArray jsonArray = JSONArray.fromObject(cl);
 			result = jsonArray.toString();
+			
 			return SUCCESS;
 		}
 		return ERROR;

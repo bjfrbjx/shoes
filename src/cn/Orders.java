@@ -6,12 +6,18 @@ package cn;
  */
 public class Orders implements java.io.Serializable {
 
-	private String orderid;
-	private String userid;
-	private String shoeid;
-	private int num;
-	private float sumpric;
-	private String date;
+	private String orderid=null;
+	private String userid=null;
+	private String shoeid=null;
+	private Integer num=null;
+	private Float sumpric=null;
+	private String date=null;
+
+	@Override
+	public String toString() {
+		return "Orders [orderid=" + orderid + ", userid=" + userid + ", shoeid=" + shoeid + ", num=" + num
+				+ ", sumpric=" + sumpric + ", date=" + date + "]";
+	}
 
 	public Orders() {
 	}
@@ -57,7 +63,7 @@ public class Orders implements java.io.Serializable {
 		this.shoeid = shoeid;
 	}
 
-	public int getNum() {
+	public Integer getNum() {
 		return this.num;
 	}
 
@@ -65,7 +71,7 @@ public class Orders implements java.io.Serializable {
 		this.num = num;
 	}
 
-	public float getSumpric() {
+	public Float getSumpric() {
 		return this.sumpric;
 	}
 

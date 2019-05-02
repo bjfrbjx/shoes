@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; utf-8" import="com.shoes.entity.*,java.util.Date"
+<%@ page language="java" contentType="text/html; utf-8" import="cn.Orders"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
-    <% Order ord =(Order)request.getAttribute("order"); %>
+    <% Orders ord =(Orders)request.getAttribute("order"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +15,9 @@
 <h2><%=ord.toString() %></h2>
 <h3>欢迎评价：</h3>
 <s:form action="addcomment" namespace="/">
-<s:token name="dojo" ></s:token>
+<s:token name="struts.token" ></s:token>
 <s:textarea name="comment.message"></s:textarea>
-<input name="comment.shoeid" value="<%=ord.getShoeID() %>" hidden="hidden"/>
+<input name="comment.shoeid" value="<%=ord.getShoeid() %>" hidden="hidden"/>
 <s:submit value="提交"></s:submit>
 </s:form>
 <%@ include file="/complete/footline.jsp" %>

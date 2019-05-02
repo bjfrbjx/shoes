@@ -3,19 +3,21 @@ package com.shoes.action;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionSupport;
-import com.shoes.entity.User;
-import com.shoes.until.DB;
+import com.shoes.until.Service;
+
+import cn.Users;
 
 public class RegistAction extends ActionSupport {
-	private User user=new User();
-	public User getUser() {
+	private Users user=new Users();
+	String token=null;
+	public void setToken(String token) { this.token = token; }
+	public String getToken() { return token; }
+	public Users getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	public RegistAction() {
@@ -24,7 +26,7 @@ public class RegistAction extends ActionSupport {
 	public String regist() throws SQLException {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		request.getSession().setAttribute("admin",new Boolean(false));
-		Boolean r=DB.regist(this.user.getName(), this.user.getSex(), this.user.getPassword(),this.user.getEmail());
+		Boolean r=Service.regist(this.user);
 		if(!r){
 			 request.setAttribute("error", "×¢²áÊ§°Ü");
 		 return ERROR;

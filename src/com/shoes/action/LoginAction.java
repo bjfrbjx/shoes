@@ -7,15 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.shoes.entity.User;
-import com.shoes.until.DB;
+import cn.Users;
+ 
+import com.shoes.until.Service;
 
 public class LoginAction extends ActionSupport {
-	private User user=new User();
-	public User getUser() {
+	private Users user=new Users();
+	public Users getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	public LoginAction() {
@@ -30,22 +31,17 @@ public class LoginAction extends ActionSupport {
 			request.getSession().setAttribute("admin",new Boolean(true));
 			return "admin";
 		}
-		try {
-			Boolean dl=DB.login(this.user.getName(), this.user.getPassword());
-			if(!dl) {
-				request.getSession().removeAttribute("user");
-				request.setAttribute("error","µÇÂ½Ê§°Ü");
-				request.getSession().setAttribute("admin",new Boolean(false));
-			return ERROR;
-			}
-			else {
-				request.getSession().setAttribute("admin",new Boolean(false));
-				request.getSession().setAttribute("user", this.user);
-				return SUCCESS;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Boolean dl=Service.login(this.user);
+		if(!dl) {
+			request.getSession().removeAttribute("user");
+			request.setAttribute("error","µÇÂ½Ê§°Ü");
+			request.getSession().setAttribute("admin",new Boolean(false));
 		return ERROR;
+		}
+		else {
+			request.getSession().setAttribute("admin",new Boolean(false));
+			request.getSession().setAttribute("user", this.user);
+			return SUCCESS;
+		}
 	}
 }

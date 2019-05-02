@@ -6,7 +6,7 @@ package cn;
  */
 public class Accumvistor implements java.io.Serializable {
 
-	private int sum;
+	private Integer sum;
 
 	public Accumvistor() {
 	}
@@ -15,7 +15,7 @@ public class Accumvistor implements java.io.Serializable {
 		this.sum = sum;
 	}
 
-	public int getSum() {
+	public Integer getSum() {
 		return this.sum;
 	}
 

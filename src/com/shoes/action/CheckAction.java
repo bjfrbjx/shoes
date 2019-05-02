@@ -4,18 +4,16 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.shoes.entity.Order;
-import com.shoes.entity.Preorder;
-import com.shoes.entity.User;
-import com.shoes.until.DB;
+import cn.Orders;
+import cn.Preorder;
+import cn.Users;
+ 
+import com.shoes.until.Service;
 
 public class CheckAction extends ActionSupport {
 	/**
@@ -23,13 +21,13 @@ public class CheckAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = -493214965117151809L;
 	private Preorder preord=new Preorder();
-	public Order getOrder() {
+	private Orders order=new Orders();
+	public Orders getOrder() {
 		return order;
 	}
-	public void setOrder(Order order) {
+	public void setOrder(Orders order) {
 		this.order = order;
 	}
-	private Order order=new Order();
 	public Preorder getPreord() {
 		return preord;
 	}
@@ -39,13 +37,13 @@ public class CheckAction extends ActionSupport {
 	public CheckAction() {
 		// TODO 自动生成的构造函数存根
 	}
-	public String createpreorder() throws UnsupportedEncodingException {
+	public String createpreorder() throws UnsupportedEncodingException, SQLException {
 		HttpServletRequest request=ServletActionContext.getRequest();
-		String username= ((User)request.getSession().getAttribute("user")).getName();	
-		this.preord.setUsername(username);
-		if(preord.getOrderID()==null) {
-		String orderID=username+"-"+Integer.toHexString((int) (Math.random()*1000))+"-"+this.preord.getShoeID();
-		this.preord.setOrderID(orderID);
+		String username= ((Users)request.getSession().getAttribute("user")).getName();	
+		this.preord.setUserid(username);
+		if(preord.getPreorderid()==null) {
+		String orderID=username+"-"+Integer.toHexString((int) (Math.random()*1000))+"-"+this.preord.getShoeid();
+		this.preord.setPreorderid(orderID);
 		}
 		else {
 			this.rempreord();
@@ -55,56 +53,47 @@ public class CheckAction extends ActionSupport {
 	}
 	public String createorder() {
 		HttpServletRequest request=ServletActionContext.getRequest();
-			DB.addOder(this.order);
+			Service.addOder(this.order);
 			request.setAttribute("order", this.order);
 			return SUCCESS;
 		
 	}
-	public String shopping() throws UnsupportedEncodingException {
+	public String shopping() throws UnsupportedEncodingException, SQLException {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		this.createpreorder();
-		DB.addpreorder(preord);
-		Set<Preorder> pds=(Set<Preorder>)request.getSession().getAttribute("preorder");
+		Service.addpreorder(preord);
+		List<Preorder> pds=(List<Preorder>)request.getSession().getAttribute("preorder");
 		pds.add(preord);
 		return SUCCESS;
 	}
 	public String getorders() throws SQLException {
-		System.out.println("----------");
 		HttpSession session=ServletActionContext.getRequest().getSession();
-		List<Order> orders=DB.getorder((User)session.getAttribute("user"));
-		System.out.println(orders.size());
+		List<Orders> orders=Service.getorder((Users)session.getAttribute("user"));
 		ActionContext.getContext().put("orders", orders);
 		return SUCCESS;
 	}
 	public String cleanpreord() {
 		HttpServletRequest request=ServletActionContext.getRequest();
-		String username=((User)request.getSession().getAttribute("user")).getName();
-		if(username!=null&&!username.equals("")) {
-			try {
-				DB.cleanpreord(username);
-				((Set<Preorder>)request.getSession().getAttribute("preorder")).clear();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		Users u=(Users)request.getSession().getAttribute("user");
+		if(u!=null&&!u.getName().equals("")) {
+			Service.cleanpreord(u);
+			((List<Preorder>)request.getSession().getAttribute("preorder")).clear();
 			}
 		return SUCCESS;
 		
 	}
-	public String rempreord() throws UnsupportedEncodingException {
+	public String rempreord() throws  SQLException {
+		
 		HttpServletRequest request=ServletActionContext.getRequest();
-		String preordID=this.preord.getOrderID();
-		if(preordID!=null) {
-			Set<Preorder> pl=(Set<Preorder>)request.getSession().getAttribute("preorder");
+		if(this.preord.getPreorderid()!=null) {
+			List<Preorder> pl=(List<Preorder>)request.getSession().getAttribute("preorder");
+			System.out.println(pl.size());
 			pl.remove(this.preord);
-		try {
-			DB.removepreord(preordID);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(pl.size());
+			Service.removepreord(this.preord);
+			return SUCCESS;
 		}
-		}
-		return SUCCESS;
+		return ERROR;
 	}
 	}
 

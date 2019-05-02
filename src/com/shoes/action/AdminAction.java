@@ -1,19 +1,20 @@
 package com.shoes.action;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import java.io.File;
 import java.io.IOException;
-
 import com.opensymphony.xwork2.ActionSupport;
-import com.shoes.entity.Shoes;
-import com.shoes.until.DB;
+import cn.Shoes;
+ 
+import com.shoes.until.Service;
+
 import org.apache.commons.io.FileUtils;
 
 public class AdminAction extends ActionSupport {
+private Service service=null; 
 private static final String imgdir=ServletActionContext.getServletContext().getRealPath("/IMG");
 private Shoes shoes=new Shoes();
 private File imgfile=null;
@@ -37,6 +38,12 @@ public String getImgfileContentType() {
 public void setImgfileContentType(String imgfileContentType) {
 	this.imgfileContentType = imgfileContentType;
 }
+public Service getService() {
+	return service;
+}
+public void setService(Service service) {
+	this.service = service;
+}
 public String getImgfileFileName() {
 	return imgfileFileName;
 }
@@ -47,44 +54,40 @@ public void setImgfileFileName(String imgfileFileName) {
 	}
 	public String addrep() throws SQLException, IOException {
 		HttpServletRequest request =ServletActionContext.getRequest();
-		Date date=new Date();
-		this.shoes.setIMG("IMG/"+imgfileFileName);
-		DB.addrep(this.shoes);
+		this.shoes.setSrc("IMG/"+imgfileFileName);
+		System.out.println(this.shoes);
+		service.addrep(this.shoes);
 		File newimg=new File(imgdir,imgfileFileName);
-		;
 		if(!newimg.exists())FileUtils.copyFile(imgfile, newimg);
 		List<Shoes> sl=(List<Shoes>)request.getSession().getAttribute("Shoeslist");
-		;
 		sl.add(this.shoes);
 		return SUCCESS;
 	}
 	public String withdraw() {
 		HttpServletRequest request =ServletActionContext.getRequest();
 		List<Shoes> sl=(List<Shoes>)request.getSession().getAttribute("Shoeslist");
-		if(this.shoes.getShoeID()!=null&&!this.shoes.getShoeID().equals("")) {
-		try {
-			String imgsrc= ServletActionContext.getServletContext().getRealPath(this.shoes.getIMG().replace("..", ""));
-			DB.removeshoes(this.shoes.getShoeID());
-			DB.remimg(imgsrc);
-			sl.remove(this.shoes);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		if(this.shoes.getShoeId()!=null&&!this.shoes.getShoeId().equals("")) {
+		String imgsrc= ServletActionContext.getServletContext().getRealPath(this.shoes.getSrc().replace("..", ""));
+		service.removeshoes(this.shoes);
+		service.remimg(imgsrc);
+		sl.remove(this.shoes);
 	}
 		return SUCCESS;
 	}
 	public String addstock() throws SQLException {
-		System.out.println(this.shoes);
 		HttpServletRequest request =ServletActionContext.getRequest();
-		if(this.shoes.getShoeID()==null)
+		if(this.shoes.getShoeId()==null)
 			return "error";
-		if(this.shoes.getSize()==0.0) {
-		request.setAttribute("shoeid", this.shoes.getShoeID());
+		if(this.shoes.getSize()==null||this.shoes.getSize()==0.0f) {
+		request.setAttribute("shoeid", this.shoes.getShoeId());
 			return "continue";
 		}
 		else {
-			
-			DB.addrep(this.shoes);
+			Shoes temp=new Shoes();
+			temp.setShoeId(this.shoes.getShoeId());
+			temp=service.getone(temp);
+			temp.setSize(this.shoes.getSize()+temp.getSize());
+			service.addstock(temp);
 			return SUCCESS;
 		}
 	}
