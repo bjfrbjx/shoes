@@ -10,10 +10,10 @@
 </head>
 <body>
    <h1>shoes store</h1>
- <s:form action="login" method="post" namespace="/">
-<br><s:textfield lable="name" name="user.name" >姓名</s:textfield>
-<br><s:textfield lable="password" name="user.password" >密码</s:textfield>
-<br><s:submit lable="Say Hello" value="提交"/>
+ <s:form action="login" method="post" namespace="/" >
+<s:textfield label="name" name="user.name" ></s:textfield>
+<s:textfield label="password" name="user.password" ></s:textfield>
+<br/><s:submit label="Say Hello" value="提交"/>
 </s:form>
 </body>
 </html>
