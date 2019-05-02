@@ -7,7 +7,7 @@
 <constant name="struts.i18n.encoding" value="UTF-8" />
 <constant name="struts.action.exetension" value="action,do,"/>
 <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
-<constant name="struts.ui.theme" value="simple" />
+<constant name="struts.ui.theme" value="xhtml" />
     <package name="checkAction" extends="struts-default,json-default" namespace="/main">
     <interceptors>
          <interceptor name="userinterceptor" class="com.shoes.until.userintercep" />
