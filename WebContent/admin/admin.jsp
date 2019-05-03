@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; utf-8" import="cn.*,com.shoes.until.Service,java.util.List"
+<%@ page language="java" contentType="text/html; utf-8" import="com.shoes.entity.Users,com.shoes.entity.Shoes,com.shoes.until.Service,java.util.List"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -46,7 +46,7 @@ List<Shoes> sl=(List<Shoes>)session.getAttribute("Shoeslist");
 </s:form>
 
 <%@ include file="/complete/footline.jsp"  %>
-<script type="text/javascript" src="JS/IEURIencode.js" ></script>
+<script type="text/javascript" src="/struts2/JS/IEURIencode.js" ></script>
 <script type="text/javascript">
 function showImg(src){
 	var showbox=document.getElementById("show");

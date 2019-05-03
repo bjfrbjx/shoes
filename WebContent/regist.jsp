@@ -5,17 +5,20 @@
 <html>
 <head>
 	<meta charset="utf-8">
-<title>登陆</title>
+<title>注册</title>
 </head>
 <body>
+<%@ include file="/complete/headline.jsp" %>
+<h1>注册</h1>
  <s:form action="regist" method="post" namespace="/" theme="xhtml">
-<br/>姓名<s:textfield label="user.name" name="user.name" ></s:textfield>
-<br/>密码<s:textfield label="user.password" name="user.password" ></s:textfield>
-<br/>邮箱<s:textfield label="user.email" name="user.email" ></s:textfield>
-<s:radio list="#{'男':'先生','女':'女士'}" name="user.sex" value="男"/>
-<br/><s:submit label="Say Hello" value="提交"/>
+<br/><s:textfield label="姓名" name="user.name" ></s:textfield>
+<br/><s:textfield label="密码" name="user.password" ></s:textfield>
+<br/><s:textfield label="邮箱" name="user.email" ></s:textfield>
+<s:radio label="性别" list="#{'男':'先生','女':'女士'}" name="user.sex" value="男"/>
+<br/><s:submit label="submit" value="提交"/>
 <s:token></s:token>
 </s:form>
 <hr/>
+<%@ include file="/complete/footline.jsp" %>
 </body>
 </html>

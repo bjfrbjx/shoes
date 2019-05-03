@@ -7,8 +7,7 @@ import org.apache.struts2.ServletActionContext;
 import java.io.File;
 import java.io.IOException;
 import com.opensymphony.xwork2.ActionSupport;
-import cn.Shoes;
- 
+import com.shoes.entity.Shoes;
 import com.shoes.until.Service;
 
 import org.apache.commons.io.FileUtils;
@@ -55,7 +54,6 @@ public void setImgfileFileName(String imgfileFileName) {
 	public String addrep() throws SQLException, IOException {
 		HttpServletRequest request =ServletActionContext.getRequest();
 		this.shoes.setSrc("IMG/"+imgfileFileName);
-		System.out.println(this.shoes);
 		service.addrep(this.shoes);
 		File newimg=new File(imgdir,imgfileFileName);
 		if(!newimg.exists())FileUtils.copyFile(imgfile, newimg);
@@ -68,7 +66,6 @@ public void setImgfileFileName(String imgfileFileName) {
 		List<Shoes> sl=(List<Shoes>)request.getSession().getAttribute("Shoeslist");
 		if(this.shoes.getShoeId()!=null&&!this.shoes.getShoeId().equals("")) {
 		String imgsrc= ServletActionContext.getServletContext().getRealPath(this.shoes.getSrc());
-		System.out.println("shoes "+this.shoes);
 		service.removeshoes(this.shoes);
 		service.remimg(imgsrc);
 		sl.remove(this.shoes);
@@ -84,11 +81,15 @@ public void setImgfileFileName(String imgfileFileName) {
 			return "continue";
 		}
 		else {
+			System.out.println("start addstock "+this.shoes);
 			Shoes temp=new Shoes();
 			temp.setShoeId(this.shoes.getShoeId());
 			temp=service.getone(temp);
+			System.out.println("old staock"+temp.getSize());
 			temp.setSize(this.shoes.getSize()+temp.getSize());
 			service.addstock(temp);
+			List<Shoes> sl=(List<Shoes>)request.getSession().getAttribute("Shoeslist");
+			sl.set(sl.indexOf(temp), temp);
 			return SUCCESS;
 		}
 	}

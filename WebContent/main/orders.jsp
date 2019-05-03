@@ -1,30 +1,33 @@
 <%@ page language="java" contentType="text/html; utf-8" 
     pageEncoding="utf-8"%>
-    <%@ taglib prefix="s" uri="/struts-tags" %>
+   <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+<meta charset="utf-8">
 <title>shopping</title>
+<s:head/>
+<sx:head/>
 </head>
 <body>
 
 <%@ include file="/complete/headline.jsp" %>
-<table>
-<thead><tr><th>订单号</th><th>用户</th><th>鞋号</th><th>数量</th><th>总价<th>下单日期</th></tr></thead>
-<tbody>
-<s:iterator value="orders">
-<tr>
-<td><s:property value="orderid"/></td>
-<td><s:property value="userid"/></td>
-<td><s:property value="shoeid"/></td>
-<td><s:property value="num"/></td>
-<td><s:property value="sumpric"/></td>
-<td><s:property value="date"/></td>
-</tr>
-</s:iterator>
-</tbody>
-</table>
+<iframe src="/struts2/main/getpageorders?index=1" name="view_frame" width="700px" height="400px"></iframe> 
+<s:textfield label="跳转" type="number" value="%{index}" id="targetindex"></s:textfield>
+<a id="findindex" href="/struts2/main/getpageorders?index=1" target="view_frame">跳转</a>
+
 <%@ include file="/complete/footline.jsp" %>
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" ></script>
+<script type="text/javascript">
+window.onload=function(){
+	$("body").delegate("#targetindex","change",function (){
+		$("#findindex").attr("href","/struts2/main/getpageorders?index="+$("#targetindex").val());
+		//$("#findindex").removeAttr("disabled");
+		$('#findindex').text("跳至："+$("#targetindex").val());
+});
+	console.log(targetindex);
+}
+</script>
 </body>
 </html>

@@ -1,79 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-   "http://struts.apache.org/dtds/struts-2.0.dtd">
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 <constant name="struts.devMode" value="true" />
 <constant name="struts.i18n.encoding" value="UTF-8" />
 <constant name="struts.action.exetension" value="action,do,"/>
 <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
 <constant name="struts.ui.theme" value="xhtml" />
-    <package name="checkAction" extends="struts-default,json-default" namespace="/main">
-    <interceptors>
-         <interceptor name="userinterceptor" class="com.shoes.until.userintercep" />
-         <interceptor-stack name="userStack">
-                    <interceptor-ref name="userinterceptor"></interceptor-ref>
-                    <interceptor-ref name="defaultStack"></interceptor-ref>
-                </interceptor-stack>
-      </interceptors>
-      <default-interceptor-ref name="userStack"></default-interceptor-ref>
-      <global-results>
-      <result name="error">/index.jsp</result>
-      </global-results>
-        <action name="pay" class="com.shoes.action.CheckAction" method="createpreorder">
-        <result name="success">/main/pay.jsp</result>
-        </action>
-        <action name="buy" class="com.shoes.action.CheckAction" method="createorder">
-        <result name="success">/main/paysuccess.jsp</result>
-        </action>
-        <action name="shopping" class="com.shoes.action.CheckAction" method="shopping">
-        <result name="success" type="redirect">/main/shopping.jsp</result>
-        </action>
-        <action name="rempreord" class="com.shoes.action.CheckAction" method="rempreord">
-        <result name="success" type="redirect">/main/shopping.jsp</result>
-        </action>
-        <action name="cleanpreord" class="com.shoes.action.CheckAction" method="cleanpreord">
-        <result name="success">/main/shopping.jsp</result>
-        </action>
-        <action name="getComments" class="com.shoes.action.CommentAction" method="getComments">
-            <result type="json" name="success"> <param name="root">result</param> </result>
-            <result name="error">/error/resubError.jsp</result>
-        </action>
-        <action name="getorders" class="com.shoes.action.CheckAction" method="getorders">
-        <result name="success">/main/orders.jsp</result>
-        </action>
-</package>
-   
-    <package name="AdminAction" extends="struts-default" namespace="/admin"> 
-    
-    <interceptors>
-         <interceptor name="admininterceptor" class="com.shoes.until.adminintercep" />
-         <interceptor-stack name="adminStack">
-                    <interceptor-ref name="admininterceptor"></interceptor-ref>
-                    <interceptor-ref name="defaultStack"></interceptor-ref>
-                </interceptor-stack>
-                
-      </interceptors>
-      <default-interceptor-ref name="adminStack"></default-interceptor-ref>
-      <global-results><result name="error" type="redirect">/index.jsp</result></global-results>
-      <action name="addrep" class="com.shoes.action.AdminAction" method="addrep">
-        <result name="success">/admin/admin.jsp</result>
-        </action>
-    	<action name="withdraw" class="com.shoes.action.AdminAction" method="withdraw">
-        <result name="success">/admin/admin.jsp</result>	
-    	</action>
-    	<action name="addstock" class="com.shoes.action.AdminAction" method="addstock">
-    	<result name="success" type="redirect" >/admin/admin.jsp</result>
-    	<result name="continue">/admin/addstock.jsp</result>
-    	</action>
-    </package>
-    
+
     <package name="user" namespace="/" extends="struts-default">
 	   <action name="addcomment" class="com.shoes.action.CommentAction" method="subComment">
 	   		<interceptor-ref name="tokenSession"/>
-	   		<interceptor-ref name="params">
-  				<param name="excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
-			</interceptor-ref>
 	   		<interceptor-ref name="defaultStack"/>
 	   		<result name="success" >/main/comment.jsp</result>
 	   		<result name="index" >/main/main.jsp</result>
@@ -101,6 +39,10 @@
         </action>
 
     </package>
+    
+      
+<include file="struts-check.xml"></include>
+<include file="struts-admin.xml"></include>
     </struts>
     
     

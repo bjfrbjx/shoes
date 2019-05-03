@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="utf-8" import="cn.Users"%>
+<%@ page language="java" pageEncoding="utf-8" import="com.shoes.entity.Users"%>
 <% String txt=(String)request.getAttribute("error"); 
 Users user=(Users)session.getAttribute("user"); 
 Boolean isadmin=(Boolean)session.getAttribute("admin");

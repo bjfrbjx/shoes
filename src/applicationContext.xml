@@ -25,7 +25,7 @@
     	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"> <!-- lazy-init="false"-->
         	<property name="dataSource" ref="dataSource" />
         	<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
-        	<property name="mappingLocations" value="classpath:cn/*.hbm.xml"></property>
+        	<property name="mappingLocations" value="classpath:com/shoes/entity/*.hbm.xml"></property>
     	</bean>  
     	<!-- 配置Spring声明式事务 -->
     	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
@@ -40,14 +40,14 @@
     	</tx:advice>
     	<!-- 配置事务切点，并把切点和事务属性关联起来 -->
     	<aop:config>
-        	<aop:pointcut expression="execution(* cn.DAOimpl.*(..))" id="txPointcut"/>
+        	<aop:pointcut expression="execution(* com.shoes.until.DAOimpl.*(..))" id="txPointcut"/>
         	<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     	</aop:config>
     	
     	<bean id="loginaction" class="com.shoes.action.LoginAction" scope="prototype" p:user-ref="user" p:service-ref="service"></bean>
         <bean id="registaction" class="com.shoes.action.RegistAction" scope="prototype" p:user-ref="user" p:service-ref="service"></bean>
-        <bean id="DAOimpl" class="cn.DAOimpl" scope="singleton" p:sessionFactory-ref="sessionFactory"></bean>
+        <bean id="DAOimpl" class="com.shoes.until.DAOimpl" scope="singleton" p:sessionFactory-ref="sessionFactory"></bean>
         <bean id="service" class="com.shoes.until.Service" p:dao-ref="DAOimpl" scope="prototype"></bean>
-        <bean id="user" class="cn.Users" scope="prototype"></bean>
+        <bean id="user" class="com.shoes.entity.Users" scope="prototype"></bean>
         </beans>
 

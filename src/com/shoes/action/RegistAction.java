@@ -5,11 +5,9 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.shoes.entity.Users;
 import com.shoes.until.Service;
-
-import cn.User;
-import cn.Users;
-
+import com.opensymphony.xwork2.validator.validators.ExpressionValidator;
 public class RegistAction extends ActionSupport {
 	private Service service=null; 
 	public Service getService() {

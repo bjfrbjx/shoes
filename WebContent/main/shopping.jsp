@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; utf-8" import="cn.Preorder,java.util.List"
+<%@ page language="java" contentType="text/html; utf-8" import="com.shoes.entity.Preorder,java.util.List"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,6 +22,6 @@ for(Preorder pd:pds) {%>
 
 <a href="cleanpreord">清空购物车</a>
 <%@ include file="/complete/footline.jsp" %>
-<script type="text/javascript" src="JS/IEURIencode.js" ></script>
+<script type="text/javascript" src="/JS/IEURIencode.js" ></script>
 </body>
 </html>

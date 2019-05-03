@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; utf-8" import="cn.*,com.shoes.until.Service,java.util.Date"
+<%@ page language="java" contentType="text/html; utf-8" import="com.shoes.entity.Preorder,com.shoes.until.Service,java.util.Date"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ Preorder ord=(Preorder)session.getAttribute("payorder");
 <%@ include file="/complete/footline.jsp" %>
 <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" ></script>
 <script type="text/javascript">
-var sin=("sumpric").val();
+var sin=$("#sumpric").val();
 $("#num").change(function(){
     $("#sumpric").val(sin*$("#num").val());
   });

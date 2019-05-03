@@ -9,17 +9,23 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import cn.Orders;
-import cn.Preorder;
-import cn.Users;
- 
+import com.shoes.entity.Orders;
+import com.shoes.entity.Preorder;
+import com.shoes.entity.Users;
 import com.shoes.until.Service;
 
 public class CheckAction extends ActionSupport {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -493214965117151809L;
+	private int index=1;
+	private static final int clumns=10;
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
+	}
 	Service service=null; 
 	public Service getService() {
 		return service;
@@ -76,7 +82,12 @@ public class CheckAction extends ActionSupport {
 	}
 	public String getorders() throws SQLException {
 		HttpSession session=ServletActionContext.getRequest().getSession();
-		List<Orders> orders=service.getorder((Users)session.getAttribute("user"));
+		Users u=(Users)session.getAttribute("user");
+		int allordsnum = service.getorder((Users)session.getAttribute("user")).size();
+		List<Orders> orders=service.getorder(index,clumns,u);
+		ActionContext.getContext().getValueStack().set("maxindex",1+allordsnum/10);
+		ActionContext.getContext().getValueStack().set("allordsnum",allordsnum);
+		ActionContext.getContext().getValueStack().set("clumns",clumns);
 		ActionContext.getContext().put("orders", orders);
 		return SUCCESS;
 	}
@@ -101,5 +112,17 @@ public class CheckAction extends ActionSupport {
 		}
 		return ERROR;
 	}
+	public String getpageorders() throws SQLException {
+		System.out.println("index:"+index);
+		HttpSession session=ServletActionContext.getRequest().getSession();
+		Users u=(Users)session.getAttribute("user");
+		int allordsnum = service.getorder((Users)session.getAttribute("user")).size();
+		List<Orders> orders=service.getorder(index,clumns,u);
+		ActionContext.getContext().getValueStack().set("maxindex",1+allordsnum/10);
+		ActionContext.getContext().getValueStack().set("allordsnum",allordsnum);
+		ActionContext.getContext().getValueStack().set("clumns",clumns);
+		ActionContext.getContext().put("orders", orders);
+		return SUCCESS;
 	}
+}
 

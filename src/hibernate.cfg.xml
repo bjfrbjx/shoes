@@ -8,11 +8,11 @@
   <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test?useSSL=false</property>
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
-  <mapping resource="cn/Users.hbm.xml"/>
-  <mapping resource="cn/Shoes.hbm.xml"/>
-  <mapping resource="cn/Preorder.hbm.xml"/>
-  <mapping resource="cn/Accumvistor.hbm.xml"/>
-  <mapping resource="cn/Orders.hbm.xml"/>
-  <mapping resource="cn/Comments.hbm.xml"/>
+  <mapping resource="com/shoes/entity/Users.hbm.xml"/>
+  <mapping resource="com/shoes/entity/Shoes.hbm.xml"/>
+  <mapping resource="com/shoes/entity/Preorder.hbm.xml"/>
+  <mapping resource="com/shoes/entity/Accumvistor.hbm.xml"/>
+  <mapping resource="com/shoes/entity/Orders.hbm.xml"/>
+  <mapping resource="com/shoes/entity/Comments.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

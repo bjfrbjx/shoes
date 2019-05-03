@@ -6,9 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import cn.Comments;
-import cn.Users;
- 
+import com.shoes.entity.Comments;
+import com.shoes.entity.Users;
 import com.shoes.until.Service;
 
 import net.sf.json.JSONArray;
@@ -69,7 +68,6 @@ public class CommentAction extends ActionSupport {
 			List<Comments> cl=service.getCommentsByShoeid(this.shoeid);
 			JSONArray jsonArray = JSONArray.fromObject(cl);
 			result = jsonArray.toString();
-			
 			return SUCCESS;
 		}
 		return ERROR;

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; utf-8" import="cn.*,com.shoes.until.Service,java.util.List"
+<%@ page language="java" contentType="text/html; utf-8" import="com.shoes.entity.Shoes,com.shoes.entity.Users,com.shoes.until.Service,java.util.List"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,7 @@ if(sh.getSize()>0){
 <a href="/struts2/main/getorders">账单</a>
 <%@ include file="/complete/footline.jsp"  %>
 <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" ></script>
-<script type="text/javascript" src="JS/IEURIencode.js" ></script>
+<script type="text/javascript" src="/struts2/JS/IEURIencode.js" ></script>
 <script type="text/javascript">
 function showImg(src){
 	var showbox=document.getElementById("show");

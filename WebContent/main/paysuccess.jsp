@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; utf-8" import="cn.Orders"
+<%@ page language="java" contentType="text/html; utf-8" import="com.shoes.entity.Orders"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
     <% Orders ord =(Orders)request.getAttribute("order"); %>
@@ -20,6 +20,17 @@
 <input name="comment.shoeid" value="<%=ord.getShoeid() %>" hidden="hidden"/>
 <s:submit value="提交"></s:submit>
 </s:form>
+    <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
+    </script>
 <%@ include file="/complete/footline.jsp" %>
 </body>
 </html>

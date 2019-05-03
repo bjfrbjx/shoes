@@ -88,7 +88,6 @@ public class ListenAll implements HttpSessionListener,ServletContextListener {
     	arg0.getServletContext().setAttribute("CurrentOnline", new Integer(0));
     	arg0.getServletContext().setAttribute("LoginNum", new Integer(0));
     	try {
-    		System.out.println("listensall's service is null ?"+service);
     		Integer AV=service.getAccumVistors();
 			//Integer AV=DB.getAccumVistors();
 			arg0.getServletContext().setAttribute("AccumVistors", AV);

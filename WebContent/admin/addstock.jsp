@@ -16,6 +16,6 @@
 </form>
 
 <%@ include file="/complete/footline.jsp" %>
-<script type="text/javascript" src="JS/IEURIencode.js" ></script>
+<script type="text/javascript" src="/struts2/JS/IEURIencode.js" ></script>
 </body>
 </html>
