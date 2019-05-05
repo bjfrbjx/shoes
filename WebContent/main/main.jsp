@@ -65,7 +65,6 @@ function showComments(shoeid){
 		});
 		
 }
-
 </script>
 
 </body>

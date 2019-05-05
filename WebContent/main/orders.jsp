@@ -13,10 +13,12 @@
 <body>
 
 <%@ include file="/complete/headline.jsp" %>
+<br>
 <iframe src="/struts2/main/getpageorders?index=1" name="view_frame" width="700px" height="400px"></iframe> 
+<br>
 <s:textfield label="跳转" type="number" value="%{index}" id="targetindex"></s:textfield>
 <a id="findindex" href="/struts2/main/getpageorders?index=1" target="view_frame">跳转</a>
-
+<br>
 <%@ include file="/complete/footline.jsp" %>
 <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" ></script>
 <script type="text/javascript">

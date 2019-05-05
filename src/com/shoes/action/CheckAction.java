@@ -80,16 +80,8 @@ public class CheckAction extends ActionSupport {
 		pds.add(preord);
 		return SUCCESS;
 	}
-	public String getorders() throws SQLException {
-		HttpSession session=ServletActionContext.getRequest().getSession();
-		Users u=(Users)session.getAttribute("user");
-		int allordsnum = service.getorder((Users)session.getAttribute("user")).size();
-		List<Orders> orders=service.getorder(index,clumns,u);
-		ActionContext.getContext().getValueStack().set("maxindex",1+allordsnum/10);
-		ActionContext.getContext().getValueStack().set("allordsnum",allordsnum);
-		ActionContext.getContext().getValueStack().set("clumns",clumns);
-		ActionContext.getContext().put("orders", orders);
-		return SUCCESS;
+	public String getorders() {
+			return innerOrderspage();
 	}
 	public String cleanpreord() {
 		HttpServletRequest request=ServletActionContext.getRequest();
@@ -112,13 +104,17 @@ public class CheckAction extends ActionSupport {
 		}
 		return ERROR;
 	}
-	public String getpageorders() throws SQLException {
-		System.out.println("index:"+index);
+	public String getpageorders(){
+		return innerOrderspage();
+	}
+	private String innerOrderspage(){
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		Users u=(Users)session.getAttribute("user");
 		int allordsnum = service.getorder((Users)session.getAttribute("user")).size();
+		int maxindex=(int)Math.floor(allordsnum/10);
+		index=index<1?1:(index>maxindex?maxindex:index);
 		List<Orders> orders=service.getorder(index,clumns,u);
-		ActionContext.getContext().getValueStack().set("maxindex",1+allordsnum/10);
+		ActionContext.getContext().getValueStack().set("maxindex",maxindex);
 		ActionContext.getContext().getValueStack().set("allordsnum",allordsnum);
 		ActionContext.getContext().getValueStack().set("clumns",clumns);
 		ActionContext.getContext().put("orders", orders);

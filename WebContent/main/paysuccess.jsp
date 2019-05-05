@@ -14,23 +14,34 @@
 <br/>
 <h2><%=ord.toString() %></h2>
 <h3>欢迎评价：</h3>
-<s:form action="addcomment" namespace="/">
+<s:form action="addcomment" namespace="/" id="form_id">
 <s:token name="struts.token" ></s:token>
-<s:textarea name="comment.message"></s:textarea>
-<input name="comment.shoeid" value="<%=ord.getShoeid() %>" hidden="hidden"/>
-<s:submit value="提交"></s:submit>
-</s:form>
-    <script id="container" name="content" type="text/plain">
+<input id="message" name="comment.message" hidden="hidden"/>
+    <script id="container"  type="text/plain" style="width:300px;height:100px">
         这里写你的初始化内容
     </script>
-    <!-- 配置文件 -->
-    <script type="text/javascript" src="ueditor.config.js"></script>
-    <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="ueditor.all.js"></script>
-    <!-- 实例化编辑器 -->
+
+<input name="comment.shoeid" id="comment.shoeid" value="<%=ord.getShoeid() %>" hidden="hidden"/>
+<s:submit value="提交"></s:submit>
+</s:form>
+
+<%@ include file="/complete/footline.jsp" %>
+    <script type="text/javascript" src="/struts2/JS/ueditor.config.js"></script>
+    <script type="text/javascript" src="/struts2/JS/ueditor.all.js"></script>
     <script type="text/javascript">
         var ue = UE.getEditor('container');
+        var messageinput=document.getElementById("message");
+        ue.ready(function () {
+            ue.setContent("初始内容",true);
+            form['editorValue'].setAttribute("disabled","true")
+         });
+        let form = document.getElementById('form_id');
+        form.onsubmit = function(e){
+        	var txt=ue.getContent().replace(new RegExp("<p>","g"), "").replace(new RegExp("</p>","g"),"").replace(new RegExp("<br/>","g"),"\n").replace(new RegExp("&nbsp;","g")," ");
+            messageinput.value=txt;
+        }
+
     </script>
-<%@ include file="/complete/footline.jsp" %>
+
 </body>
 </html>
