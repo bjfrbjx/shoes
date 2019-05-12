@@ -4,12 +4,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<%@ include file="/complete/headcss.jsp" %>
 <title>shopping</title>
 </head>
 <body>
 
 <%@ include file="/complete/headline.jsp" %>
-<table>
+<table  class="altrowstable">
 <thead><tr><th>订单号</th><th>用户</th><th>鞋号</th><th>购买</th><th>移除</th></tr></thead>
 <%  List<Preorder> pds=(List<Preorder>)session.getAttribute("preorder");
 for(Preorder pd:pds) {%>

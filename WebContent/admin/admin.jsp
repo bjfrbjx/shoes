@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<%@ include file="/complete/headcss.jsp" %>
 <title>main</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
 <% Users u=(Users)session.getAttribute("user");
 List<Shoes> sl=(List<Shoes>)session.getAttribute("Shoeslist");
 %>
-<table>
+<table  class="altrowstable" >
 <thead><tr><th>鞋号<th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>库存</th><th>下架</th><th>增库</th></tr></thead>
 <tbody>
 <%for(Shoes sh:sl) {%>

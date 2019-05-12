@@ -4,6 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<%@ include file="/complete/headcss.jsp" %>
 <title>main</title>
 </head>
 <body >
@@ -11,7 +12,8 @@
 <% Users u=(Users)session.getAttribute("user");
 List<Shoes> sl=(List<Shoes>)session.getAttribute("Shoeslist");
 %>
-<table>
+<div style="float:left">
+<table  class="altrowstable">
 <thead><tr><th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>库存</th><th>购买</th><th>购物车</th></tr></thead>
 <tbody>
 <%for(Shoes sh:sl) {
@@ -31,13 +33,15 @@ if(sh.getSize()>0){
 } %>
 </tbody>
 </table>
-<div >
-<img alt="tupian" src="/struts2/<%=sl.get(0).getSrc() %>" id="show" style="width:400px;height:300px">
+</div>
+<div style="float:left">
+<img alt="tupian" src="/struts2/<%=sl.get(0).getSrc() %>" id="show" style="width:500px;height:400px">
+</div>
+<div style="float:left">
 <ul id="comments"><li>买前看一看</li></ul>
 </div>
 
-<a href="/struts2/main/shopping.jsp">购物车</a>
-<a href="/struts2/main/getorders">账单</a>
+
 <%@ include file="/complete/footline.jsp"  %>
 <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" ></script>
 <script type="text/javascript" src="/struts2/JS/IEURIencode.js" ></script>
@@ -59,7 +63,7 @@ function showComments(shoeid){
 		for(var i in data){
 			$("#comments").append("<li><pre>"+data[i].date+"  "+data[i].username+"  "+data[i].message+"</pre></li>");
 				}
-			},
+		},
 		error:function(data){
 			alert("fail");
 			},

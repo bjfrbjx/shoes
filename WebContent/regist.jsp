@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<%@ include file="/complete/headcss.jsp" %>
 <title>注册</title>
 </head>
 <body>

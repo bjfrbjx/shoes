@@ -6,6 +6,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<%@ include file="/complete/headcss.jsp" %>
 <title>shopping</title>
 </head>
 <body>
