@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; utf-8" import="com.shoes.entity.Orders"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
-    <% Orders ord =(Orders)request.getAttribute("order"); %>
+    <% Orders ord =(Orders)session.getAttribute("payingord"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,7 @@
 <h2><%=ord.toString() %></h2>
 <h3>欢迎评价：</h3>
 <s:form action="addcomment" namespace="/" id="form_id">
-<s:token name="struts.token" ></s:token>
+<s:token ></s:token>
 <input id="message" name="comment.message" hidden="hidden"/>
     <script id="container"  type="text/plain" style="width:300px;height:100px">
         这里写你的初始化内容

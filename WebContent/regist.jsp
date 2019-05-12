@@ -16,7 +16,7 @@
 <br/><s:textfield label="邮箱" name="user.email" ></s:textfield>
 <s:radio label="性别" list="#{'男':'先生','女':'女士'}" name="user.sex" value="男"/>
 <br/><s:submit label="submit" value="提交"/>
-<s:token></s:token>
+<s:token ></s:token>
 </s:form>
 <hr/>
 <%@ include file="/complete/footline.jsp" %>

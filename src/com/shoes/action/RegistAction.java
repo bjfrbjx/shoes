@@ -17,9 +17,6 @@ public class RegistAction extends ActionSupport {
 		this.service = service;
 	}
 	private Users user=new Users();
-	String token=null;
-	public void setToken(String token) { this.token = token; }
-	public String getToken() { return token; }
 	public Users getUser() {
 		return user;
 	}

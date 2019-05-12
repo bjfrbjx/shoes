@@ -12,11 +12,13 @@
 Preorder ord=(Preorder)session.getAttribute("payorder");
 %>
 <%@ include file="/complete/headline.jsp" %>
-<form action="buy" method="post">
+<!-- <form action="buy" method="post"> -->
+<form action="testpay" method="post">
 <ul>
 <li>订单号:<input type="text" name="order.orderid" value="<%=ord.getPreorderid() %>" readonly="readonly"></li>
 <li>用户:<input type="text" name="order.userid" value="<%=ord.getUserid() %>" readonly="readonly"></li>
 <li>鞋号:<input type="text" name="order.shoeid" value="<%=ord.getShoeid() %>" readonly="readonly"></li>
+<li>商品规格:<input type="text" name="order.subject" value="<s:property value="subject"/>" readonly="readonly"></li>
 <li>数量:<input id="num" type="number" name="order.num" value="1" min="0" max="10"></li>
 <li>下单时间:<input type="text" name="order.date" value="<%=(new Date()).toLocaleString()%>" readonly="readonly"></li>
 <li>总价：<input type="number" id="sumpric" name="order.sumpric" value="<s:property value="singleprice"/>" readonly="readonly"></li>

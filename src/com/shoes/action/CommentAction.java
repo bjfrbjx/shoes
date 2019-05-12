@@ -16,15 +16,12 @@ public class CommentAction extends ActionSupport {
 	Service service=null; 
 	private String shoeid ="";
 	private String result;
-	String strutstoken;
-	public void setStrutstoken(String token) { this.strutstoken = token; }
 	public Service getService() {
 		return service;
 	}
 	public void setService(Service service) {
 		this.service = service;
 	}
-	public String getStrutstoken() { return strutstoken; }
 	public String getResult() {
 		return result;
 	}

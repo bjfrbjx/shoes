@@ -9,16 +9,14 @@
 <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
 <constant name="struts.ui.theme" value="xhtml" />
 
-    <package name="user" namespace="/" extends="struts-default">
+    <package name="user" namespace="/" extends="json-default,struts-default">
 	   <action name="addcomment" class="com.shoes.action.CommentAction" method="subComment">
-	   		<interceptor-ref name="tokenSession"/>
+	   		<interceptor-ref name="token"/>
 	   		<interceptor-ref name="defaultStack"/>
 	   		<result name="success" >/main/comment.jsp</result>
 	   		<result name="index" >/main/main.jsp</result>
 	   		<result name="error">/error/commentsError.jsp</result>
        		<result name="invalid.token">/error/resubError.jsp</result>
-	   		
-		    
         </action>
         <action name="login" class="loginaction" method="login">
             <result name="success">/main/main.jsp</result>
@@ -30,14 +28,18 @@
             <result name="success">/index.jsp</result>
         </action>
         <action name="regist" class="com.shoes.action.RegistAction" method="regist">
-        <interceptor-ref name="tokenSession"/>
+        <interceptor-ref name="token"/>
 	   	<interceptor-ref name="defaultStack"/>
             <result name="success">/main/main.jsp</result>
             <result name="input">/regist.jsp </result>
             <result name="error">/index.jsp</result>
             <result name="invalid.token">/error/resubError.jsp</result>
         </action>
-
+		<action name="getuserinfo" class="com.shoes.action.LoginAction" method="getuserinfo">
+			<result type="json" name="success"> <param name="root">result</param> </result>
+            <result name="error">/error/resubError.jsp</result>
+		</action>
+		
     </package>
     
       

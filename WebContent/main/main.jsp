@@ -31,7 +31,8 @@ if(sh.getSize()>0){
 } %>
 </tbody>
 </table>
-<div ><img alt="tupian" src="/struts2/<%=sl.get(0).getSrc() %>" id="show">
+<div >
+<img alt="tupian" src="/struts2/<%=sl.get(0).getSrc() %>" id="show" style="width:400px;height:300px">
 <ul id="comments"><li>买前看一看</li></ul>
 </div>
 
