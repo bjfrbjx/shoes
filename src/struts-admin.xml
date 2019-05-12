@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+     <package name="AdminAction" extends="struts-default" namespace="/admin"> 
+    <interceptors>
+         <interceptor name="admininterceptor" class="com.shoes.until.adminintercep" />
+         <interceptor-stack name="adminStack">
+                    <interceptor-ref name="admininterceptor"></interceptor-ref>
+                    <interceptor-ref name="defaultStack"></interceptor-ref>
+                </interceptor-stack>
+                
+      </interceptors>
+      <default-interceptor-ref name="adminStack"></default-interceptor-ref>
+      <global-results><result name="error" type="redirect">/index.jsp</result></global-results>
+      <action name="addrep" class="com.shoes.action.AdminAction" method="addrep">
+        <result name="success">/admin/admin.jsp</result>
+        </action>
+    	<action name="withdraw" class="com.shoes.action.AdminAction" method="withdraw">
+        <result name="success">/admin/admin.jsp</result>	
+    	</action>
+    	<action name="addstock" class="com.shoes.action.AdminAction" method="addstock">
+    	<result name="success" type="redirect" >/admin/admin.jsp</result>
+    	<result name="continue">/admin/addstock.jsp</result>
+    	</action>
+    </package>
+    
+</struts>

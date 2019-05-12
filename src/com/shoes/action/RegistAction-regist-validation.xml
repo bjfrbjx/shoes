@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.2//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+<validator type="requiredstring">
+    <param name="fieldname">user.name</param>
+    <message>usersname is required.</message>
+</validator>
+<validator type="requiredstring">
+    <param name="fieldname">user.password</param>
+    <message>password is required.</message>
+</validator>
+<validator type="requiredstring">
+    <param name="fieldname">user.sex</param>
+    <message>sex is required.</message>
+</validator>
+<validator type="requiredstring">
+    <param name="fieldname">user.email</param>
+    <message>email is required.</message>
+</validator>
+<validator type="regex">
+    <param name="fieldname">user.password</param>
+    <param name="regex">.*[a-zA-Z]+.*</param>
+    <message>must has charactors</message>
+</validator>
+<validator type="regex">
+    <param name="fieldname">user.password</param>
+    <param name="regex">.*[0-9]+.*</param>
+    <message>must has numbers</message>
+</validator>
+<validator type="stringlength">
+<param name="fieldname">user.password</param>
+<param name="minLength">6</param>
+ <param name="trim">true</param>
+   <message>
+       Your username needs to be 6 characters longer
+   </message>
+</validator>
+<validator type="regex">
+    <param name="fieldname">user.sex</param>
+    <param name="regex">[\u7537\u5973]</param>
+    <message>must be 男 or 女</message>
+</validator>
+<validator type="email">
+    <param name="fieldname">user.email</param>
+    <message>Email address not valid.</message>
+</validator>
+ 
+
+</validators>
