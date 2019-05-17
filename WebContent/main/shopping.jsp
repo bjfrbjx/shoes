@@ -4,6 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<base href="http://localhost:8081/struts2/main">
 	<%@ include file="/complete/headcss.jsp" %>
 <title>shopping</title>
 </head>
@@ -15,13 +16,13 @@
 <%  List<Preorder> pds=(List<Preorder>)session.getAttribute("preorder");
 for(Preorder pd:pds) {%>
 <tr><td><%=pd.getPreorderid() %></td><td><%=pd.getUserid() %></td><td><%=pd.getShoeid() %></td>
-<td><a class="link" href="pay?preord.shoeid=<%=pd.getShoeid() %>&preord.preorderid=<%=pd.getPreorderid() %>">购买</a>
-<td><a class="link" href="rempreord?preord.preorderid=<%=pd.getPreorderid() %>">移除</a>
+<td><a class="link" href="main/pay?preord.shoeid=<%=pd.getShoeid() %>&preord.preorderid=<%=pd.getPreorderid() %>">购买</a>
+<td><a class="link" href="main/rempreord?preord.preorderid=<%=pd.getPreorderid() %>">移除</a>
 </tr>
 <%} %>
 </table>
 
-<a href="cleanpreord">清空购物车</a>
+<a href="main/cleanpreord">清空购物车</a>
 <%@ include file="/complete/footline.jsp" %>
 <script type="text/javascript" src="/struts2/JS/IEURIencode.js" ></script>
 </body>

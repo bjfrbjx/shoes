@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta charset="utf-8">
-
+<base href="http://localhost:8081/struts2/main">
 <%@ include file="/complete/headcss.jsp" %>
 <title>shopping</title>
 <s:head/>
 <sx:head/>
 </head>
 <body>
-
+<base href="http://localhost:8081/struts2">
 <%@ include file="/complete/headline.jsp" %>
 <br>
 <iframe src="/struts2/main/getpageorders?index=1" name="view_frame" width="700px" height="400px"></iframe> 

@@ -6,11 +6,10 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<%@ include file="/complete/headcss.jsp" %>
+	<base href="http://localhost:8081/struts2/">
 <title>shopping</title>
 </head>
 <body>
-<%@ include file="/complete/headline.jsp" %>
 <h1>支付成功</h1>
 <br/>
 <h2><%=ord.toString() %></h2>
@@ -19,21 +18,19 @@
 <s:token ></s:token>
 <input id="message" name="comment.message" hidden="hidden"/>
     <script id="container"  type="text/plain" style="width:300px;height:100px">
-        这里写你的初始化内容
     </script>
 
 <input name="comment.shoeid" id="comment.shoeid" value="<%=ord.getShoeid() %>" hidden="hidden"/>
 <s:submit value="提交"></s:submit>
 </s:form>
 
-<%@ include file="/complete/footline.jsp" %>
     <script type="text/javascript" src="/struts2/JS/ueditor.config.js"></script>
     <script type="text/javascript" src="/struts2/JS/ueditor.all.js"></script>
     <script type="text/javascript">
         var ue = UE.getEditor('container');
         var messageinput=document.getElementById("message");
         ue.ready(function () {
-            ue.setContent("初始内容",true);
+            ue.setContent("您的评价很重要",true);
             form['editorValue'].setAttribute("disabled","true")
          });
         let form = document.getElementById('form_id');

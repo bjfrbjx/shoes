@@ -7,5 +7,7 @@
 </head>
 <body>
 <h1>重复提交</h1>
+<br>
+<a href="index.jsp">index</a>
 </body>
 </html>

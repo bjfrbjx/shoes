@@ -5,6 +5,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	
+	<base href="http://localhost:8081/struts2/main">
 	<%@ include file="/complete/headcss.jsp" %>
 <title>shopping</title>
 </head>
@@ -14,7 +16,7 @@ Preorder ord=(Preorder)session.getAttribute("payorder");
 %>
 <%@ include file="/complete/headline.jsp" %>
 <!-- <form action="buy" method="post"> -->
-<form action="testpay" method="post">
+<form action="main/testpay" method="post" >
 <ul>
 <li>订单号:<input type="text" name="order.orderid" value="<%=ord.getPreorderid() %>" readonly="readonly"></li>
 <li>用户:<input type="text" name="order.userid" value="<%=ord.getUserid() %>" readonly="readonly"></li>

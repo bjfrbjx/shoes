@@ -86,6 +86,7 @@ public class Users implements java.io.Serializable ,HttpSessionBindingListener{
 			arg0.getSession().setAttribute("Shoeslist", service.getshoes());
 		Integer Lognum=(Integer)arg0.getSession().getServletContext().getAttribute("LoginNum");
 		arg0.getSession().getServletContext().setAttribute("LoginNum",++Lognum);
+		System.out.println(name+"is loging "+Lognum);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,6 +97,7 @@ public class Users implements java.io.Serializable ,HttpSessionBindingListener{
 		//arg0.getSession().setMaxInactiveInterval(60);
 		Integer Lognum=(Integer)arg0.getSession().getServletContext().getAttribute("LoginNum");
 		arg0.getSession().getServletContext().setAttribute("LoginNum",--Lognum);
+		System.out.println(name+"is logout "+Lognum);
 	}
 
 }

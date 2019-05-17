@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<base href="http://localhost:8081/struts2/admin">
 	<%@ include file="/complete/headcss.jsp" %>
 <title>main</title>
 </head>
@@ -13,6 +14,7 @@
 <% Users u=(Users)session.getAttribute("user");
 List<Shoes> sl=(List<Shoes>)session.getAttribute("Shoeslist");
 %>
+<div style="float:left">
 <table  class="altrowstable" >
 <thead><tr><th>鞋号<th>品牌</th><th>款式</th><th>价格</th><th>性别</th><th>库存</th><th>下架</th><th>增库</th></tr></thead>
 <tbody>
@@ -30,7 +32,8 @@ List<Shoes> sl=(List<Shoes>)session.getAttribute("Shoeslist");
 <%} %>
 </tbody>
 </table>
-<div ><img alt="tupian" src="/struts2/IMG/a.jpg" id="show"></div>
+</div>
+<div style="float:left"><img alt="tupian" src="/struts2/IMG/a.jpg" id="show" style="width:500px;height:400px"></div>
 <hr/>
 <s:form action="addrep" enctype="multipart/form-data" method="post" namespace="/admin" >
 <ul>

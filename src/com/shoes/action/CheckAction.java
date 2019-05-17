@@ -134,6 +134,7 @@ public class CheckAction extends ActionSupport {
 		Users u=(Users)session.getAttribute("user");
 		int allordsnum = service.getorder((Users)session.getAttribute("user")).size();
 		int maxindex=(int)Math.floor(allordsnum/10);
+		if(allordsnum%10!=0) maxindex++;
 		index=index<1?1:(index>maxindex?maxindex:index);
 		List<Orders> orders=service.getorder(index,clumns,u);
 		ActionContext.getContext().getValueStack().set("maxindex",maxindex);

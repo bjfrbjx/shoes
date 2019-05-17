@@ -4,6 +4,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	
+	<base href="http://localhost:8081/struts2/main">
 	<%@ include file="/complete/headcss.jsp" %>
 <title>main</title>
 </head>

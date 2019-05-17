@@ -1,6 +1,4 @@
 <%@ page language="java" pageEncoding="utf-8" %>
-<base href="http://localhost:8081/struts2/">
-
 <link href="IMG/favicon.png" rel="icon">
 <link rel="stylesheet" href="CSS/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="CSS/plugins/ps-icon/style.css">
